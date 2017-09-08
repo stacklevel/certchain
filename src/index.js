@@ -7,9 +7,9 @@ import { UserIsAuthenticated } from './util/wrappers.js'
 
 // Layouts
 import App from './App'
-import Home from './layouts/home/Home'
-import Dashboard from './layouts/dashboard/Dashboard'
-import Profile from './user/layouts/profile/Profile'
+import RegisterManufacturerContainer from './containers/RegisterManufacturerContainer';
+import RegisterAuditorContainer from './containers/RegisterAuditorContainer';
+import RegisterOrganContainer from './containers/RegisterOrganContainer';
 
 // Redux Store
 import store from './store'
@@ -20,9 +20,10 @@ ReactDOM.render((
     <Provider store={store}>
       <Router history={history}>
         <Route path="/" component={App}>
-          <IndexRoute component={Home} />
-          <Route path="dashboard" component={UserIsAuthenticated(Dashboard)} />
-          <Route path="profile" component={UserIsAuthenticated(Profile)} />
+          <IndexRoute component={RegisterManufacturerContainer} />
+          <Route path="register-manufacturer" component={RegisterManufacturerContainer} /> 
+          <Route path="register-auditor" component={RegisterAuditorContainer} /> 
+          <Route path="register-organ" component={RegisterOrganContainer} />   
         </Route>
       </Router>
     </Provider>

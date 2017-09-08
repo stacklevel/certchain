@@ -3,3 +3,40 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.Form__input {
+  /* margin: 10px 0; */
+}
+
+.Form__button {
+  margin: 20px 0;
+}
+
+.Form__title {
+  text-align: center;
+}
+
+.Form__inline {
+  display: flex;
+}
+
+.Form__inline > *:first-child {
+  margin-right: 10px;
+}
+
+.Form__select {
+  width: 100%;
+}
+
+.ant-layout-header {
+  background: #35B4F2 !important;
+}
+
+.ant-menu-dark.ant-menu-horizontal {
+  background-color: #35B4F2 !important;
+  border-bottom-color: #35B4F2 !important;
+}
+
+.ant-form-item {
+  margin-bottom: 10px;
+}

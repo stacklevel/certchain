@@ -1,51 +1,44 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
 import { HiddenOnlyAuth, VisibleOnlyAuth } from './util/wrappers.js'
+import './App.css';
 
-// UI Components
-import LoginButtonContainer from './user/ui/loginbutton/LoginButtonContainer'
-import LogoutButtonContainer from './user/ui/logoutbutton/LogoutButtonContainer'
+import { Layout, Menu } from 'antd';
+const { Header, Content, Footer } = Layout;
 
-// Styles
-import './css/oswald.css'
-import './css/open-sans.css'
-import './css/pure-min.css'
-import './App.css'
+
+const imageSrc = './img/logo.png';
 
 class App extends Component {
   render() {
-    const OnlyAuthLinks = VisibleOnlyAuth(() =>
-      <span>
-        <li className="pure-menu-item">
-          <Link to="/dashboard" className="pure-menu-link">Dashboard</Link>
-        </li>
-        <li className="pure-menu-item">
-          <Link to="/profile" className="pure-menu-link">Profile</Link>
-        </li>
-        <LogoutButtonContainer />
-      </span>
-    )
-
-    const OnlyGuestLinks = HiddenOnlyAuth(() =>
-      <span>
-        <LoginButtonContainer />
-      </span>
-    )
-
     return (
-      <div className="App">
-        <nav className="navbar pure-menu pure-menu-horizontal">
-          <Link to="/" className="pure-menu-heading pure-menu-link">Truffle Box</Link>
-          <ul className="pure-menu-list navbar-right">
-            <OnlyGuestLinks />
-            <OnlyAuthLinks />
-          </ul>
-        </nav>
-
-        {this.props.children}
-      </div>
+      <Layout className="layout">
+        <Header>
+          {/* <div className="logo">
+            <img src={imageSrc} alt="certchain"/>
+          </div> */}
+          <Menu
+            theme="dark"
+            mode="horizontal"
+            defaultSelectedKeys={['3']}
+            style={{ lineHeight: '64px' }}
+          >
+            <Menu.Item key="1"><Link to='register-manufacturer'>Manufacturer</Link></Menu.Item>
+            <Menu.Item key="2"><Link to='register-auditor'>Auditor</Link></Menu.Item>
+            <Menu.Item key="3"><Link to='register-organ'>Certification Organ</Link></Menu.Item>
+          </Menu>
+        </Header>
+        <Content style={{ padding: '0 50px' }}>
+          <div style={{ background: '#fff', padding: 24, minHeight: '86vh' }}>
+            {this.props.children}
+          </div>
+        </Content>
+        <Footer style={{ textAlign: 'center' }}>
+          Certchain.io ©2017
+        </Footer>
+      </Layout>
     );
   }
 }
 
-export default App
+export default App;
