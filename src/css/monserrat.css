@@ -1,0 +1,41 @@
+@font-face {
+  font-family: 'Oswald';
+  font-weight: 400;
+  font-style: normal;
+  src: url('../fonts/Oswald-regular/Oswald-regular.eot');
+  src: url('../fonts/Oswald-regular/Oswald-regular.eot?#iefix') format('embedded-opentype'),
+       local('Oswald Regular'),
+       local('Oswald-regular'),
+       url('../fonts/Oswald-regular/Oswald-regular.woff2') format('woff2'),
+       url('../fonts/Oswald-regular/Oswald-regular.woff') format('woff'),
+       url('../fonts/Oswald-regular/Oswald-regular.ttf') format('truetype'),
+       url('../fonts/Oswald-regular/Oswald-regular.svg#Oswald') format('svg');
+}
+
+@font-face {
+  font-family: "Montserrat";
+  font-style: normal;
+  src: url("../fonts/Montserrat/Montserrat-Light.ttf") format('truetype');
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  font-style: normal;
+  src: url("../fonts/Montserrat/Montserrat-Regular.ttf") format('truetype');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  font-style: normal;
+  src: url("../fonts/Montserrat/Montserrat-Medium.ttf") format('truetype');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  font-style: normal;
+  src: url("../fonts/Montserrat/Montserrat-Bold.ttf") format('truetype');
+  font-weight: 600;
+}
