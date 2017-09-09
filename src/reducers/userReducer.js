@@ -4,8 +4,10 @@ import constants from '../constants';
 import { default as Web3 } from 'web3';
 import { default as contract } from 'truffle-contract';
 import manufacturer_artifacts from '../../build/contracts/Manufacturer.json';
+import auditor_artifacts from '../../build/contracts/Auditor.json';
 
 const Manufacturer = contract(manufacturer_artifacts);
+const Auditor = contract(auditor_artifacts);
 
 if (typeof window.web3 !== 'undefined') {
   console.warn("Using web3 detected from external source like Metamask")
@@ -20,9 +22,11 @@ if (typeof window.web3 !== 'undefined') {
 window.web3.eth.defaultAccount = window.web3.eth.accounts[0];
 
 Manufacturer.setProvider(window.web3.currentProvider);
+Auditor.setProvider(window.web3.currentProvider);
 
 const {
   REGISTER_MANUFACTURER_SUCCESS,
+  REGISTER_AUDITOR_SUCCESS,
 } = constants;
 
 export const initialState = {
@@ -42,6 +46,26 @@ export default createReducer(initialState, {
       return manufacturerInstance.register(...payload.manufacturer, { from: window.web3.eth.accounts[0] });
     }).then(function() {
       return manufacturerInstance.getByAddress(window.web3.eth.defaultAccount);
+    }).then(function(storedData) {
+      console.log(storedData);
+    });
+
+    // return Object.assign({}, state, {
+    //   manufacturer: payload,
+    // })
+  },
+  [REGISTER_AUDITOR_SUCCESS]: (state, payload) => {
+    console.log(payload);
+
+    let auditorInstance;
+    // debugger;
+
+    return Auditor.deployed().then(function(instance) {
+      auditorInstance = instance;
+      
+      return auditorInstance.register(...payload.auditor, { from: window.web3.eth.accounts[0] });
+    }).then(function() {
+      return auditorInstance.getByAddress(window.web3.eth.defaultAccount);
     }).then(function(storedData) {
       console.log(storedData);
     });

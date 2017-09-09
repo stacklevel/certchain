@@ -15,3 +15,19 @@ const registerManufacturerFailure = errors => ({
 export const registerManufacturer = params => (dispatch) => {
   dispatch(registerManufacturerSuccess(params));
 };
+
+const registerAuditorSuccess = auditor => (dispatch) => {
+  dispatch({
+    type: actionTypes.REGISTER_AUDITOR_SUCCESS,
+    payload: { auditor },
+  });
+};
+
+const registerAuditorFailure = errors => ({
+  type: actionTypes.REGISTER_MANUFACTURER_FAILURE,
+  payload: { errors },
+});
+
+export const registerAuditor = params => (dispatch) => {
+  dispatch(registerAuditorSuccess(params));
+};

@@ -73,6 +73,25 @@ class RegisterAuditorForm extends Component {
 
   handleSubmit() {
     console.log(this.state);
+
+    const {
+      fullName,
+      direction,
+      trainingDate,
+      trainingOrganization,
+      certificationDate,
+      certificationOrganization,
+      phone,
+      email
+    } = this.state;
+
+    this.props.registerAuditor([
+      fullName,
+      trainingOrganization,
+      certificationOrganization,
+      phone,
+      email
+    ]);
   }
 
   render() {
