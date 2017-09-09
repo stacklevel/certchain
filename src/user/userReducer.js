@@ -2,9 +2,9 @@ import { default as Web3 } from 'web3';
 import { default as contract } from 'truffle-contract';
 
 
-import storage_artifacts from '../../build/contracts/SimpleStorage.json';
+// import storage_artifacts from '../../build/contracts/SimpleStorage.json';
 
-const SimpleStorage = contract(storage_artifacts);
+// const SimpleStorage = contract(storage_artifacts);
 
 const initialState = {
   data: null,
@@ -20,7 +20,7 @@ if (typeof window.web3 !== 'undefined') {
   window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 }
 
-SimpleStorage.setProvider(window.web3.currentProvider);
+// SimpleStorage.setProvider(window.web3.currentProvider);
 
 const userReducer = (state = initialState, action) => {
   if (action.type === 'USER_LOGGED_IN')
@@ -41,15 +41,15 @@ const userReducer = (state = initialState, action) => {
   {
     let simpleStorageInstance;
 
-    return SimpleStorage.deployed().then(function(instance) {
-      simpleStorageInstance = instance;
+    // return SimpleStorage.deployed().then(function(instance) {
+    //   simpleStorageInstance = instance;
   
-      return simpleStorageInstance.set(action.payload, { from: window.web3.eth.accounts[0]});
-    }).then(function() {
-      return simpleStorageInstance.get.call();
-    }).then(function(storedData) {
-      console.log(storedData);
-    });
+    //   return simpleStorageInstance.set(action.payload, { from: window.web3.eth.accounts[0]});
+    // }).then(function() {
+    //   return simpleStorageInstance.get.call();
+    // }).then(function(storedData) {
+    //   console.log(storedData);
+    // });
   }
 
   return state
