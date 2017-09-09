@@ -10,6 +10,7 @@ import App from './App'
 import RegisterManufacturerContainer from './containers/RegisterManufacturerContainer';
 import RegisterAuditorContainer from './containers/RegisterAuditorContainer';
 import RegisterOrganContainer from './containers/RegisterOrganContainer';
+import DashboardContainer from './containers/DashboardContainer.jsx';
 
 // Redux Store
 import store from './store'
@@ -23,7 +24,9 @@ ReactDOM.render((
           <IndexRoute component={RegisterManufacturerContainer} />
           <Route path="register-manufacturer" component={RegisterManufacturerContainer} /> 
           <Route path="register-auditor" component={RegisterAuditorContainer} /> 
-          <Route path="register-organ" component={RegisterOrganContainer} />   
+          <Route path="register-organ" component={RegisterOrganContainer} />
+          <Route path="dashboard" component={DashboardContainer} />
+          
         </Route>
       </Router>
     </Provider>

@@ -42,7 +42,6 @@ export default createReducer(initialState, {
     console.log(payload);
 
     let manufacturerInstance;
-    debugger;
 
     return Manufacturer.deployed().then(function(instance) {
       manufacturerInstance = instance;

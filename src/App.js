@@ -30,7 +30,7 @@ class App extends Component {
               <Menu.Item key="3"><Link to='register-organ'>Certification Organ</Link></Menu.Item>
             </Menu>
           </Header>
-          <Content style={{ padding: '0 50px' }}>
+          <Content style={{ width: 1200, alignSelf: 'center', padding: '0 50px' }}>
             <div style={{ background: '#fff', padding: 24, minHeight: '86vh' }}>
               {this.props.children}
             </div>
