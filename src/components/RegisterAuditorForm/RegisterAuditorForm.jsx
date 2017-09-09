@@ -17,10 +17,11 @@ class RegisterAuditorForm extends Component {
     this.state = {
       fullName: '',
       direction: '',
-      organization: '',
+      trainingOrganization: '',
       trainingDate: null,
       certificationDate: null,
       certificationFile: null,
+      certificationOrganization: '', 
       phone: '',
       email: '',
     };
@@ -79,8 +80,9 @@ class RegisterAuditorForm extends Component {
       fullName,
       direction,
       trainingDate,
-      organization,
+      trainingOrganization,
       certificationDate,
+      certificationOrganization,
       phone,
       email
     } =  this.state;
@@ -133,8 +135,8 @@ class RegisterAuditorForm extends Component {
                     className="Form__input"
                     size="large"
                     placeholder="Organization name"
-                    name='organiztion'
-                    value={organization}
+                    name='trainingOrganization'
+                    value={trainingOrganization}
                     onChange={this.handleInputChange}
                   />
                 </div>
@@ -152,8 +154,8 @@ class RegisterAuditorForm extends Component {
                     className="Form__input"
                     size="large"
                     placeholder="Organization name"
-                    name='organiztion'
-                    value={organization}
+                    name='certificationOrganization'
+                    value={certificationOrganization}
                     onChange={this.handleInputChange}
                   />
                 </div>

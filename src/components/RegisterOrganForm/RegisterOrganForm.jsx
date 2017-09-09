@@ -36,7 +36,6 @@ class RegisterOrganForm extends Component {
   }
 
   handleFileChange({ file, fileList }) {
-    // console.log(file, fileList);
     if (file.status !== 'uploading') {
       this.setState({
         document: file.thumbUrl
