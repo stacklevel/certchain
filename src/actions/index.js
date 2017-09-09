@@ -5,40 +5,6 @@ import manufacturer_artifacts from '../../build/contracts/Manufacturer.json';
 import auditor_artifacts from '../../build/contracts/Auditor.json';
 import organ_artifacts from '../../build/contracts/Organ.json'
 
-const Manufacturer = contract(manufacturer_artifacts);
-const Auditor = contract(auditor_artifacts);
-const Organ = contract(organ_artifacts);
-
-const getManufacturerSuccess = manufacturer => (dispatch) => {
-  dispatch({
-    type: actionTypes.GET_MANUFACTURER_SUCCESS,
-    payload: { manufacturer },
-  });
-};
-
-const getManufacturerFailure = errors => ({
-  type: actionTypes.GET_MANUFACTURER_FAILURE,
-  payload: { errors },
-});
-
-export const getAllManufacturers = manufacturer => (dispatch) => {
-  Manufacturer.deployed().then(instance => {
-    // const head = instance.getHeadAddr();
-    // const current = head;
-    // while(current !== '0x0') {
-    //   const response = instance.getByAddress(current.nextAddr);
-    //   dispatch(getManufacturerSuccess(response));
-    //   current = current.nextAddr;
-    // }
-    // const events = instance.LogManufactureRegistered({fromBlock: 0, toBlock: 'latest'});
-    // console.log(events);
-    // events.watch((error, response) => {
-    //   console.log(response.args);
-    //   dispatch(getManufacturerSuccess(response.args))
-    // });
-  });
-}
-
 import { default as Web3 } from 'web3';
 import { isNull } from 'lodash';
 
@@ -51,9 +17,129 @@ if (typeof window.web3 !== 'undefined') {
 }
 
 window.web3.eth.defaultAccount = window.web3.eth.accounts[0];
+
+const Manufacturer = contract(manufacturer_artifacts);
+const Auditor = contract(auditor_artifacts);
+const Organ = contract(organ_artifacts);
+
 Manufacturer.setProvider(window.web3.currentProvider);
 Auditor.setProvider(window.web3.currentProvider);
 Organ.setProvider(window.web3.currentProvider);
+
+// --------------------------------------------------------------
+
+const getManufacturerSuccess = manufacturer => (dispatch) => {
+  dispatch({
+    type: actionTypes.GET_MANUFACTURER_SUCCESS,
+    payload: { manufacturer },
+  });
+};
+
+const parseManufacturer = (address, data) => {
+  let parsedData = data.slice(0, 8).map(e => window.web3.toAscii(e).replace(/\u0000/g, ''))
+  return {
+    [address]: {
+      name: parsedData[0],
+      scope: parsedData[1],
+      productsAndServices: parsedData[2],
+      legalAddress: parsedData[3],
+      bankName: parsedData[4],
+      uniqNumber: parsedData[5],
+      phoneNumber: parsedData[6],
+      email: parsedData[7],
+      nextAddr: data[8],
+    }
+  };
+}
+
+export function getAllManufacturers() {
+  return async function(dispatch) {
+    let instance = await Manufacturer.deployed();
+    let head = await instance.getHeadAddr();
+    let current = head;
+
+    while (parseInt(current) !== 0) {
+      let response = await instance.getByAddress(current);
+      dispatch(getManufacturerSuccess(parseManufacturer(current, response)));
+      current = response[response.length - 1];
+    }
+  }
+}
+
+// --------------------------------------------------------------
+
+const getAuditorSuccess = auditor => (dispatch) => {
+  dispatch({
+    type: actionTypes.GET_AUDITOR_SUCCESS,
+    payload: { auditor },
+  });
+};
+
+const parseAuditor = (address, data) => {
+  let parsedData = data.slice(0, 5).map(e => window.web3.toAscii(e).replace(/\u0000/g, ''))
+  return {
+    [address]: {
+      name: parsedData[0],
+      education: parsedData[1],
+      certInfo: parsedData[2],
+      phoneNumber: parsedData[3],
+      email: parsedData[4],
+      nextAddr: data[5],
+    }
+  };
+}
+
+export function getAllAuditors() {
+  return async function(dispatch) {
+    let instance = await Auditor.deployed();
+    let head = await instance.getHeadAddr();
+    let current = head;
+
+    while (parseInt(current) !== 0) {
+      let response = await instance.getByAddress(current);
+      dispatch(getAuditorSuccess(parseAuditor(current, response)));
+      current = response[response.length - 1];
+    }
+  }
+}
+
+// --------------------------------------------------------------
+
+const getOrganSuccess = organ => (dispatch) => {
+  dispatch({
+    type: actionTypes.GET_ORGAN_SUCCESS,
+    payload: { organ },
+  });
+};
+
+const parseOrgan = (address, data) => {
+  let parsedData = data.slice(0, 4).map(e => window.web3.toAscii(e).replace(/\u0000/g, ''))
+  return {
+    [address]: {
+      name: parsedData[0],
+      addr: parsedData[1],
+      phoneNumber: parsedData[2],
+      email: parsedData[3],
+      nextAddr: data[4],
+    }
+  };
+}
+
+export function getAllOrgans() {
+  return async function(dispatch) {
+    let instance = await Organ.deployed();
+    let head = await instance.getHeadAddr();
+    let current = head;
+
+    while (parseInt(current) !== 0) {
+      let response = await instance.getByAddress(current);
+      dispatch(getOrganSuccess(parseOrgan(current, response)));
+      current = response[response.length - 1];
+    }
+  }
+}
+
+// --------------------------------------------------------------
 
 const registerManufacturerSuccess = manufacturer => (dispatch) => {
   dispatch({
@@ -87,51 +173,38 @@ export const registerAuditor = params => (dispatch) => {
   dispatch(registerAuditorSuccess(params));
 };
 
-export const getUser = () => (dispatch) => {
-    let auditorInstance;
-    let manufacturerInstance;
+const validateUser = (user) => user[Object.keys(user)[0]] !== ''
 
-    let auditorPromise = Auditor.deployed().then(function(instance) {
-      auditorInstance = instance;
-    }).then(function() {
-      return auditorInstance.getByAddress(window.web3.eth.defaultAccount);
+export function getUser() {
+  return async function(dispatch) {
+    const auditorInstance = await Auditor.deployed();
+    const manufacturerInstance = await Manufacturer.deployed();
+    const organInstance = await Organ.deployed();
+
+    const currentAddress = window.web3.eth.defaultAccount;
+
+    const auditor = await auditorInstance.getByAddress(currentAddress);
+    const manufacturer = await manufacturerInstance.getByAddress(currentAddress);
+    const organ = await organInstance.getByAddress(currentAddress);
+
+    const parsedAuditor = parseAuditor(currentAddress, auditor);
+    const parsedManufacturer = parseManufacturer(currentAddress, manufacturer);
+    const parsedOrgan = parseOrgan(currentAddress, organ);
+
+    let user = {};
+    if (validateUser(parsedAuditor[currentAddress])) {
+      user = Object.assign({}, parsedAuditor, {[currentAddress]: Object.assign({}, parsedAuditor[currentAddress], {role: 'auditor'})});
+    } else if(validateUser(parsedManufacturer[currentAddress])) {
+      user = Object.assign({}, parsedManufacturer, {[currentAddress]: Object.assign({}, parsedManufacturer[currentAddress], {role: 'manufacturer'})});
+    } else if(validateUser(parsedOrgan[currentAddress])) {
+      user = Object.assign({}, parsedOrgan, {[currentAddress]: Object.assign({}, parsedOrgan[currentAddress], {role: 'organ'})});
+    }
+
+    dispatch({
+      type: actionTypes.GET_USER,
+      payload: user,
     });
-
-    let manufacturerPromise = Manufacturer.deployed().then(function(instance) {
-      manufacturerInstance = instance;
-    }).then(function() {
-      return manufacturerInstance.getByAddress(window.web3.eth.defaultAccount);
-    });
-
-    Promise.all([auditorPromise, manufacturerPromise])
-      .then(accounts => {
-        const keys = [
-          'companyName', 'scope',
-          'products', 'address',
-          'bankName', 'uniqNumber',
-          'phone', 'email'
-        ];
-        const currentAccount = accounts
-                                .map(account => {
-                                  if(!parseInt(account[0])) {
-                                    return null;
-                                  } else {
-                                    return account.map(value => window.web3
-                                                                  .toAscii(value)
-                                                                  .replace(/\u0000/g, ''));
-                                  } 
-                                })
-                                .filter(account => !isNull(account))[0];
-
-        let manufacturer = {};
-        keys.forEach((key, index) => manufacturer[key] = currentAccount[index]);
-
-        console.log(manufacturer);
-        dispatch({
-          type: actionTypes.GET_USER,
-          payload: manufacturer
-        });
-      });
+  }
 }
 
 const registerOrganSuccess = organ => (dispatch) => {

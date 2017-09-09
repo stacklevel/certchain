@@ -24,6 +24,7 @@ class RegisterOrganForm extends Component {
       'handleInputChange',
       'handleFileChange',
       'handleSubmit',
+      'handleGetAll',
     ]);
   }
 
@@ -47,6 +48,10 @@ class RegisterOrganForm extends Component {
     const { companyName, address, phone, email } = this.state;
 
     this.props.registerOrgan([companyName, address, phone, email]);
+  }
+
+  handleGetAll() {
+    this.props.getAllOrgans();
   }
 
   render() {
@@ -125,6 +130,13 @@ class RegisterOrganForm extends Component {
                 onClick={this.handleSubmit}
               >
                 Register
+              </Button>
+              <Button
+                className="RegisterOrganForm__button"
+                type="default"
+                onClick={this.handleGetAll}
+              >
+                Get all
               </Button>
             </div>
           </Col>

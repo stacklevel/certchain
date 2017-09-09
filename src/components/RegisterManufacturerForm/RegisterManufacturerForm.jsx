@@ -28,7 +28,7 @@ class RegisterManufacturerForm extends Component {
       'handleInputChange',
       'handleSelectChange',
       'handleSubmit',
-      'handleGetAll'
+      'handleGetAll',
     ]);
   }
 
