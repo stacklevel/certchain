@@ -1,6 +1,28 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+
+export const SIMPLE_STORAGE_TEST = 'SIMPLE_STORAGE_TEST';
+
 
 class Home extends Component {
+  constructor() {
+    super();
+    this.state = {
+      test: '',
+    };
+  }
+
+  handleChange(event) {
+    const text = event.target.value;
+
+    this.setState({ test: text });
+  }
+
+  handleClick() {
+    this.props.onStorageTestClick(this.state.test);
+  }
+
   render() {
     return(
       <main className="container">
@@ -26,6 +48,8 @@ class Home extends Component {
               {"Hello { this.props.authData.name }!"}
             </code></pre>
             <h3>Further Reading</h3>
+            <input type="text" onChange={this.handleChange.bind(this)} value={this.state.test} />
+            <button onClick={this.handleClick.bind(this)}>Save</button>
             <p>The React/Redux portions of the authentication fuctionality are provided by <a href="https://github.com/mjrussell/redux-auth-wrapper" target="_blank">mjrussell/redux-auth-wrapper</a>.</p>
           </div>
         </div>
@@ -34,4 +58,26 @@ class Home extends Component {
   }
 }
 
-export default Home
+const mapStateToProps = (state, ownProps) => {
+  return {}
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onStorageTestClick: (test) => {
+      event.preventDefault();
+
+      dispatch({
+        type: 'SIMPLE_STORAGE_TEST',
+        payload: test
+      });
+    }
+  }
+}
+
+const HomeContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home);
+
+export default HomeContainer;
