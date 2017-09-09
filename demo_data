@@ -11,7 +11,7 @@ CertOrder.deployed().then(i => i.getByAddress(web3.eth.accounts[0]))
 
 
 
-CertOrder.deployed().then(i => i.apply(web3.eth.accounts[0], '0x1ac98e9f012432a637afa0f8647a7e4fb62ffafe', {from: web3.eth.accounts[2]}))
+CertOrder.deployed().then(i => i.apply(web3.eth.accounts[0], {from: web3.eth.accounts[2]}))
 
 CertOrder.deployed().then(i => i.selectAuditor(web3.eth.accounts[2], {from: web3.eth.accounts[0]}))
 CertOrder.deployed().then(i => i.getSelectedAuditor(web3.eth.accounts[1]))
