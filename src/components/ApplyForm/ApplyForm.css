@@ -1,0 +1,23 @@
+
+.ApplyForm .ant-menu-item {
+  border-right: 3px solid transparent;
+}
+
+.ApplyForm .ant-menu-item-selected, .ApplyForm .ant-menu-item:hover {
+  border-right: 3px solid #35b4f2;
+}
+
+.ApplyForm__table {
+  padding: 20px 90px;
+  /* border: 1px solid #eee; */
+}
+
+.ApplyForm__buttons {
+  padding: 10px 90px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.ApplyForm__buttons > *:first-child {
+  margin-right: 20px;
+}
