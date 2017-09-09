@@ -27,6 +27,7 @@ Auditor.setProvider(window.web3.currentProvider);
 const {
   REGISTER_MANUFACTURER_SUCCESS,
   REGISTER_AUDITOR_SUCCESS,
+  GET_USER,
 } = constants;
 
 export const initialState = {
@@ -73,5 +74,9 @@ export default createReducer(initialState, {
     // return Object.assign({}, state, {
     //   manufacturer: payload,
     // })
-  }
+  },
+  [GET_USER]: (state, payload) => 
+    Object.assign({}, state, {
+      manufacturer: payload,
+    }),
 });

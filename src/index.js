@@ -7,6 +7,7 @@ import { UserIsAuthenticated } from './util/wrappers.js'
 
 // Layouts
 import App from './App'
+import HomeContainer from './containers/HomeContainer';
 import RegisterManufacturerContainer from './containers/RegisterManufacturerContainer';
 import RegisterAuditorContainer from './containers/RegisterAuditorContainer';
 import RegisterOrganContainer from './containers/RegisterOrganContainer';
@@ -20,7 +21,7 @@ ReactDOM.render((
     <Provider store={store}>
       <Router history={history}>
         <Route path="/" component={App}>
-          <IndexRoute component={RegisterManufacturerContainer} />
+          <IndexRoute component={HomeContainer} />
           <Route path="register-manufacturer" component={RegisterManufacturerContainer} /> 
           <Route path="register-auditor" component={RegisterAuditorContainer} /> 
           <Route path="register-organ" component={RegisterOrganContainer} />   

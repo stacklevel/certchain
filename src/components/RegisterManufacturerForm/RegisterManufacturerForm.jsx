@@ -18,8 +18,8 @@ class RegisterManufacturerForm extends Component {
       scope: '',
       products: '',
       address: '',
-      account: '',
       bankName: '',
+      uniqNumber: '',
       phone: '',
       email: '',
     };
@@ -44,9 +44,9 @@ class RegisterManufacturerForm extends Component {
   }
 
   handleSubmit() {
-    const { companyName, scope, products, address, account, bankName, phone, email } = this.state;
+    const { companyName, scope, products, address, uniqNumber, bankName, phone, email } = this.state;
 
-    this.props.registerManufacturer([companyName, scope, products, address, bankName, account, phone, email]);
+    this.props.registerManufacturer([companyName, scope, products, address, bankName, uniqNumber, phone, email]);
   }
 
   render() {
@@ -55,7 +55,7 @@ class RegisterManufacturerForm extends Component {
       scope,
       products,
       address,
-      account,
+      uniqNumber,
       bankName,
       phone,
       email
@@ -111,13 +111,13 @@ class RegisterManufacturerForm extends Component {
                   onChange={this.handleInputChange}
                 />
               </FormItem>
-              <FormItem label="Account">
+              <FormItem label="uniqNumber">
                 <Input
                   className="Form__input"
                   size="large"
-                  placeholder="Account"
-                  name='account'
-                  value={account}
+                  placeholder="uniqNumber"
+                  name='uniqNumber'
+                  value={uniqNumber}
                   onChange={this.handleInputChange}
                 />
               </FormItem>
