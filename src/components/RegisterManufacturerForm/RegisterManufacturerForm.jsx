@@ -40,13 +40,13 @@ class RegisterManufacturerForm extends Component {
   }
 
   handleSelectChange(scope) {
-    this.setState({
-      scope
-    });
+    this.setState({ scope });
   }
 
   handleSubmit() {
-    console.log(this.state);
+    const { companyName, scope, products, address, account, bankName, phone, email } = this.state;
+
+    this.props.registerManufacturer([companyName, scope, products, address, bankName, account, phone, email]);
   }
 
   render() {
