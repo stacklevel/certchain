@@ -15,14 +15,14 @@ class RegisterOrganForm extends Component {
     this.state = {
       companyName: '',
       address: '',
-      document: '',
+      document: null,
       phone: '',
       email: '',
     };
 
     bindAll(this, [
       'handleInputChange',
-      'handleDocumentChange',
+      'handleFileChange',
       'handleSubmit',
     ]);
   }
@@ -35,8 +35,13 @@ class RegisterOrganForm extends Component {
     });
   }
 
-  handleDocumentChange(document) {
-    console.log(document);
+  handleFileChange({ file, fileList }) {
+    // console.log(file, fileList);
+    if (file.status !== 'uploading') {
+      this.setState({
+        document: file.thumbUrl
+      });
+    }
   }
 
   handleSubmit() {
@@ -49,7 +54,11 @@ class RegisterOrganForm extends Component {
       address,
       phone,
       email
-    } =  this.state;
+    } = this.state;
+
+    const props = {
+      action: '//jsonplaceholder.typicode.com/posts/',
+    };
 
     return (
       <div className='RegisterOrganForm'>
@@ -81,7 +90,7 @@ class RegisterOrganForm extends Component {
               <FormItem
                 label="Document"
               >
-                <Upload name="certification" onChange={this.handleDocumentChange}>
+                <Upload {...props} name="document" listType="picture" onChange={this.handleFileChange}>
                   <Button>
                     <Icon type="upload" /> Upload
                   </Button>

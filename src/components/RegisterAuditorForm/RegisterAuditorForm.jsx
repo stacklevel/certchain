@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { bindAll } from 'lodash';
+import moment from 'moment';
 import { Input, Button, Row, Col, Form, Upload, Icon, Select, DatePicker } from 'antd';
 import 'antd/dist/antd.css';
 import '../../index.css';
@@ -17,6 +18,9 @@ class RegisterAuditorForm extends Component {
       fullName: '',
       direction: '',
       organization: '',
+      trainingDate: null,
+      certificationDate: null,
+      certificationFile: null,
       phone: '',
       email: '',
     };
@@ -24,6 +28,9 @@ class RegisterAuditorForm extends Component {
     bindAll(this, [
       'handleInputChange',
       'handleSelectChange',
+      'handleTrainingDateChange',
+      'handleCertificationDateChange',
+      'handleFileChange',
       'handleSubmit',
     ]);
   }
@@ -42,6 +49,27 @@ class RegisterAuditorForm extends Component {
     });
   }
 
+
+  handleTrainingDateChange(date) {
+    this.setState({
+      trainingDate: date
+    });
+  }
+
+  handleCertificationDateChange(date) {
+    this.setState({
+      certificationDate: date
+    });
+  }
+
+  handleFileChange({ file, fileList }) {
+    if (file.status !== 'uploading') {
+      this.setState({
+        certificationFile: file.thumbUrl
+      });
+    }
+  }
+
   handleSubmit() {
     console.log(this.state);
   }
@@ -50,10 +78,16 @@ class RegisterAuditorForm extends Component {
     const {
       fullName,
       direction,
+      trainingDate,
       organization,
+      certificationDate,
       phone,
       email
     } =  this.state;
+
+    const props = {
+      action: '//jsonplaceholder.typicode.com/posts/',
+    };
 
     return (
       <div className='RegisterAuditorForm'>
@@ -90,7 +124,11 @@ class RegisterAuditorForm extends Component {
                 label="Education"
               >
                 <div className="Form__inline">
-                  <DatePicker format="YYYY-MM-DD" />
+                  <DatePicker
+                    format="YYYY-MM-DD"
+                    value={trainingDate}
+                    onChange={this.handleTrainingDateChange}
+                  />
                   <Input
                     className="Form__input"
                     size="large"
@@ -105,7 +143,11 @@ class RegisterAuditorForm extends Component {
                 label="Certification document"
               >
                 <div className="Form__inline">
-                  <DatePicker format="YYYY-MM-DD" />
+                  <DatePicker
+                    format="YYYY-MM-DD"
+                    value={certificationDate}
+                    onChange={this.handleCertificationDateChange}
+                  />
                   <Input
                     className="Form__input"
                     size="large"
@@ -115,7 +157,7 @@ class RegisterAuditorForm extends Component {
                     onChange={this.handleInputChange}
                   />
                 </div>
-                <Upload name="certification" action="/upload.do" listType="picture">
+                <Upload {...props} name="certification" listType="picture" onChange={this.handleFileChange}>
                   <Button>
                     <Icon type="upload" /> Upload
                   </Button>
