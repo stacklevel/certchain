@@ -1,0 +1,5 @@
+Manufacturer.deployed().then(i => i.register("Burn", "Food & drinks", "Burn", "Imaguru", "Priorbank","1234567890","+375(44)462-20-40","burn@gmail.com",{from: web3.eth.accounts[0]}));
+Manufacturer.deployed().then(i => i.register("Rich", "Food & drinks", "Juice", "Imaguru", "Alfa-bank","0987654321","+375(29)123-45-67","rich@gmail.com",{from: web3.eth.accounts[1]}));
+Auditor.deployed().then(i => i.register("Eugene", "BSUIR", "ISO9001","+375(29)789-65-67","eugene_bsuir@gmail.com",{from: web3.eth.accounts[2]}));
+Auditor.deployed().then(i => i.register("Peter", "BSU", "ISO9001","+375(29)123-65-67","peter_bsu@gmail.com",{from: web3.eth.accounts[3]}));
+Auditor.deployed().then(i => i.register("Nicolas", "BSEU", "ISO9001","+375(29)789-11-22","nicolas_bseu@gmail.com",{from: web3.eth.accounts[4]}));

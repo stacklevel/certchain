@@ -114,8 +114,8 @@ class RegisterAuditorForm extends Component {
       <div className='RegisterAuditorForm'>
         <h2 className='Form__title'>Auditor Registration</h2>
         <Row>
-          <Col span={8} />
-          <Col span={8}>
+          <Col span={6} />
+          <Col span={12}>
             <InputGroup size="large">
               <FormItem label="Full name">
                 <Input

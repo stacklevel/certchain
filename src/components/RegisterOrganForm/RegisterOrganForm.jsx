@@ -44,7 +44,9 @@ class RegisterOrganForm extends Component {
   }
 
   handleSubmit() {
-    console.log(this.state);
+    const { companyName, address, phone, email } = this.state;
+
+    this.props.registerOrgan([companyName, address, phone, email]);
   }
 
   render() {
@@ -63,8 +65,8 @@ class RegisterOrganForm extends Component {
       <div className='RegisterOrganForm'>
         <h2 className='Form__title'>Organ Registration</h2>
         <Row>
-          <Col span={8} />
-          <Col span={8}>
+          <Col span={6} />
+          <Col span={12}>
             <InputGroup size="large">
               <FormItem label="Company name">
                 <Input

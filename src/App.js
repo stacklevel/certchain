@@ -16,10 +16,12 @@ class App extends Component {
       <LocaleProvider locale={enUS}>
         <Layout className="layout">
           <Header>
-             <div className="logo">
-              <img src={imageSrc} alt="certchain"/>
-              <div className='logo__text'>Blockchain Certification Network</div>
-            </div> 
+            <Link to='/'>
+              <div className="logo">
+                <img src={imageSrc} alt="certchain"/>
+                <div className='logo__text'>Blockchain Certification Network</div>
+              </div> 
+            </Link>
             <div className="right__menu">
               <Menu
                 theme="dark"
@@ -36,9 +38,9 @@ class App extends Component {
                 <Button type="primary">Log In</Button>
                </div> 
             </div>
-          </Header>
-          <Content style={{ padding: '0 50px' }}>
-            <div style={{ background: '#fff', padding: 24, minHeight: '85vh' }}>
+          </Header>  
+          <Content style={{ width: 1200, alignSelf: 'center', padding: '0 50px' }}>
+            <div style={{ background: '#fff', padding: 24, minHeight: '86vh' }}>
               {this.props.children}
             </div>
           </Content>

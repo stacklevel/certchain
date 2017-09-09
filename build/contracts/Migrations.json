@@ -73,19 +73,19 @@
       "address": "0xade1c6f157d1704bedb7499c0e2cb8a4ecd02952",
       "updated_at": 1504934735872
     },
-    "1504939554983": {
+    "1504943605832": {
       "events": {},
       "links": {},
-      "address": "0xfe509417b3e56b33d7cb22a8186ed77ffa9fa2f4",
-      "updated_at": 1504942052536
+      "address": "0x49703aa4d98601c154f4504b06f817931817b035",
+      "updated_at": 1504943652756
     },
     "1504949058061": {
       "events": {},
       "links": {},
-      "address": "0xc4b31bfd2df74d3667beda6d23749a06f17f3196",
-      "updated_at": 1504949072113
+      "address": "0x31dfe0aa4bb308c995575c636173e9f40646ec10",
+      "updated_at": 1504964241403
     }
   },
   "schema_version": "0.0.5",
-  "updated_at": 1504949072113
+  "updated_at": 1504964241403
 }

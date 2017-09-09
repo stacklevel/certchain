@@ -30,14 +30,20 @@ body {
 
 .ant-layout-header {
   background: #282828!important;
+  position: fixed;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  height: 72px !important;
+  z-index: 2;
 }
 
-.ant-menu-dark.ant-menu-horizontal {
+.ant-layout-header .ant-menu-dark.ant-menu-horizontal {
   background-color: #282828 !important;
   border-bottom-color: #282828 !important;
 }
 
-.ant-menu-item {
+.ant-layout-header .ant-menu-item {
   margin-top: 4px !important;
   background-color: #282828 !important;
   border-bottom: 3px solid transparent !important;
@@ -48,35 +54,29 @@ body {
   margin-right: 20px;
 }
 
-.ant-menu.ant-menu-dark .ant-menu-item-active, .ant-menu-item:hover, .ant-menu.ant-menu-dark .ant-menu-item-selected {
+.ant-layout-header .ant-menu.ant-menu-dark .ant-menu-item-active,
+.ant-layout-header .ant-menu-item:hover,
+.ant-layout-header .ant-menu.ant-menu-dark .ant-menu-item-selected {
   background-color: #282828 !important;
   border-bottom: 3px solid #fff !important;
 }
 
-.ant-form-item {
+.ant-layout-header .ant-form-item {
   margin-bottom: 10px;
 }
 
-.ant-layout-header {
-  position: fixed;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  height: 72px !important;
-}
-
-.logo {
+.ant-layout-header .logo {
   display: flex;
   align-items: center;
 }
 
-.logo img {
+.ant-layout-header .logo img {
   width: 142px;
   height: 48px;
   margin-right: 20px;
 }
 
-.logo__text {
+.ant-layout-header .logo__text {
   position: relative;
   display: inline-block;
   font-family: PingFangSC;
@@ -85,17 +85,17 @@ body {
   margin-top: 8px;
 }
 
-.logo__text::before {
+.ant-layout-header .logo__text::before {
   position: absolute;
   content: '';
   height: 36px;
-  width: 3px;
+  width: 2px;
   background: #fff;
   top: 13px;
   left: -10px;
 }
 
-.right__menu {
+.ant-layout-header .right__menu {
   display: flex;
   align-items: center;
   justify-content: space-between;
