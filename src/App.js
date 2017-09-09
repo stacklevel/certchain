@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
-import { HiddenOnlyAuth, VisibleOnlyAuth } from './util/wrappers.js'
 import './App.css';
 
 import { Layout, Menu, LocaleProvider, Button } from 'antd';
@@ -26,12 +25,12 @@ class App extends Component {
               <Menu
                 theme="dark"
                 mode="horizontal"
-                defaultSelectedKeys={['3']}
                 style={{ lineHeight: '64px' }}
               >
                 <Menu.Item key="1"><Link to='register-manufacturer'>Manufacturer</Link></Menu.Item>
                 <Menu.Item key="2"><Link to='register-auditor'>Auditor</Link></Menu.Item>
-                <Menu.Item key="3"><Link to='register-organ'>Certification Organ</Link></Menu.Item>
+                <Menu.Item key="3"><Link to='register-organ'>Certification Body</Link></Menu.Item>
+                <Menu.Item key="4"><Link to='dashboard'>Dashboard</Link></Menu.Item>
               </Menu>
                <div className="Button__group"> 
                 <Button ghost>Sign Up</Button>

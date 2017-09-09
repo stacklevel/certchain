@@ -11,8 +11,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const DashboardContainer = 
-// withRouter(
   connect(mapStateToProps, mapDispatchToProps)(DashboardForm);
-// );
 
 export default DashboardContainer;

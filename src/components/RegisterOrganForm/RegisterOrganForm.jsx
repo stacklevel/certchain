@@ -63,7 +63,7 @@ class RegisterOrganForm extends Component {
 
     return (
       <div className='RegisterOrganForm'>
-        <h2 className='Form__title'>Organ Registration</h2>
+        <h2 className='Form__title'>Certification Body Registration</h2>
         <Row>
           <Col span={6} />
           <Col span={12}>
