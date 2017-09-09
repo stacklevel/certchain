@@ -1,4 +1,4 @@
-pragma solidity ^0.4.0;
+pragma solidity ^0.4.4;
 
 
 contract Auditor {
@@ -17,8 +17,6 @@ contract Auditor {
 
 
     function register(bytes32 name, bytes32 education, bytes32 certInfo, bytes32 phoneNumber, bytes32 email) {
-
-        require(auditorInfo[msg.sender].Name != "");
 
         auditorInfo[msg.sender].Name = name;
         auditorInfo[msg.sender].Education = education;
