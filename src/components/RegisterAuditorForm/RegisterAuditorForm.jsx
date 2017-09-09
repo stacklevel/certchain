@@ -21,7 +21,7 @@ class RegisterAuditorForm extends Component {
       trainingDate: null,
       certificationDate: null,
       certificationFile: null,
-      certificationOrganization: '', 
+      certificationOrganization: '',
       phone: '',
       email: '',
     };
@@ -33,6 +33,7 @@ class RegisterAuditorForm extends Component {
       'handleCertificationDateChange',
       'handleFileChange',
       'handleSubmit',
+      'handleGetAll',
     ]);
   }
 
@@ -92,6 +93,10 @@ class RegisterAuditorForm extends Component {
       phone,
       email
     ]);
+  }
+
+  handleGetAll() {
+    this.props.getAllAuditors();
   }
 
   render() {
@@ -212,6 +217,13 @@ class RegisterAuditorForm extends Component {
                 onClick={this.handleSubmit}
               >
                 Register
+              </Button>
+              <Button
+                className="RegisterAuditorForm__button"
+                type="default"
+                onClick={this.handleGetAll}
+              >
+                Get all
               </Button>
             </div>
           </Col>

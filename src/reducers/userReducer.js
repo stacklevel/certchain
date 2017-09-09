@@ -19,12 +19,16 @@ const {
   REGISTER_AUDITOR_SUCCESS,
   GET_USER,
   REGISTER_ORGAN_SUCCESS,
-  GET_MANUFACTURER_SUCCESS
+  GET_MANUFACTURER_SUCCESS,
+  GET_AUDITOR_SUCCESS,
+  GET_ORGAN_SUCCESS
 } = constants;
 
 export const initialState = {
-  manufacturer: null,
+  user: null,
   manufacturers: {},
+  auditors: {},
+  organs: {},
 };
 
 export default createReducer(initialState, {
@@ -99,10 +103,21 @@ export default createReducer(initialState, {
       manufacturer: payload,
     }),
   [GET_MANUFACTURER_SUCCESS]: (state, payload) => {
-    Object.assign({}, state, {
-      manufacturers: Object.assign({}, state.manufacturers, {
-        [payload.address]: payload,
-      })
+    let data = payload.manufacturer;
+    return Object.assign({}, state, {
+      manufacturers: Object.assign({}, state.manufacturers, data)
+    });
+  },
+  [GET_AUDITOR_SUCCESS]: (state, payload) => {
+    let data = payload.auditor;
+    return Object.assign({}, state, {
+      auditors: Object.assign({}, state.auditors, data)
+    });
+  },
+  [GET_ORGAN_SUCCESS]: (state, payload) => {
+    let data = payload.organ;
+    return Object.assign({}, state, {
+      organs: Object.assign({}, state.organs, data)
     });
   }
 });
