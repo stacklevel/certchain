@@ -58,7 +58,7 @@ export function getAllManufacturers() {
     let head = await instance.getHeadAddr();
     let current = head;
 
-    while (current !== '0x0000000000000000000000000000000000000000') {
+    while (parseInt(current) !== 0) {
       let response = await instance.getByAddress(current);
       dispatch(getManufacturerSuccess(parseManufacturer(current, response)));
       current = response[response.length - 1];
@@ -95,7 +95,7 @@ export function getAllAuditors() {
     let head = await instance.getHeadAddr();
     let current = head;
 
-    while (current !== '0x0000000000000000000000000000000000000000') {
+    while (parseInt(current) !== 0) {
       let response = await instance.getByAddress(current);
       dispatch(getAuditorSuccess(parseAuditor(current, response)));
       current = response[response.length - 1];
@@ -131,7 +131,7 @@ export function getAllOrgans() {
     let head = await instance.getHeadAddr();
     let current = head;
 
-    while (current !== '0x0000000000000000000000000000000000000000') {
+    while (parseInt(current) !== 0) {
       let response = await instance.getByAddress(current);
       dispatch(getOrganSuccess(parseOrgan(current, response)));
       current = response[response.length - 1];
@@ -173,51 +173,38 @@ export const registerAuditor = params => (dispatch) => {
   dispatch(registerAuditorSuccess(params));
 };
 
-export const getUser = () => (dispatch) => {
-    let auditorInstance;
-    let manufacturerInstance;
+const validateUser = (user) => user[Object.keys(user)[0]] !== ''
 
-    let auditorPromise = Auditor.deployed().then(function(instance) {
-      auditorInstance = instance;
-    }).then(function() {
-      return auditorInstance.getByAddress(window.web3.eth.defaultAccount);
+export function getUser() {
+  return async function(dispatch) {
+    const auditorInstance = await Auditor.deployed();
+    const manufacturerInstance = await Manufacturer.deployed();
+    const organInstance = await Organ.deployed();
+
+    const currentAddress = window.web3.eth.defaultAccount;
+
+    const auditor = await auditorInstance.getByAddress(currentAddress);
+    const manufacturer = await manufacturerInstance.getByAddress(currentAddress);
+    const organ = await organInstance.getByAddress(currentAddress);
+
+    const parsedAuditor = parseAuditor(currentAddress, auditor);
+    const parsedManufacturer = parseManufacturer(currentAddress, manufacturer);
+    const parsedOrgan = parseOrgan(currentAddress, organ);
+
+    let user = {};
+    if (validateUser(parsedAuditor[currentAddress])) {
+      user = Object.assign({}, parsedAuditor, {[currentAddress]: Object.assign({}, parsedAuditor[currentAddress], {role: 'auditor'})});
+    } else if(validateUser(parsedManufacturer[currentAddress])) {
+      user = Object.assign({}, parsedManufacturer, {[currentAddress]: Object.assign({}, parsedManufacturer[currentAddress], {role: 'manufacturer'})});
+    } else if(validateUser(parsedOrgan[currentAddress])) {
+      user = Object.assign({}, parsedOrgan, {[currentAddress]: Object.assign({}, parsedOrgan[currentAddress], {role: 'organ'})});
+    }
+
+    dispatch({
+      type: actionTypes.GET_USER,
+      payload: user,
     });
-
-    let manufacturerPromise = Manufacturer.deployed().then(function(instance) {
-      manufacturerInstance = instance;
-    }).then(function() {
-      return manufacturerInstance.getByAddress(window.web3.eth.defaultAccount);
-    });
-
-    Promise.all([auditorPromise, manufacturerPromise])
-      .then(accounts => {
-        const keys = [
-          'companyName', 'scope',
-          'products', 'address',
-          'bankName', 'uniqNumber',
-          'phone', 'email'
-        ];
-        const currentAccount = accounts
-                                .map(account => {
-                                  if(!parseInt(account[0])) {
-                                    return null;
-                                  } else {
-                                    return account.map(value => window.web3
-                                                                  .toAscii(value)
-                                                                  .replace(/\u0000/g, ''));
-                                  } 
-                                })
-                                .filter(account => !isNull(account))[0];
-
-        let manufacturer = {};
-        keys.forEach((key, index) => manufacturer[key] = currentAccount[index]);
-
-        console.log(manufacturer);
-        dispatch({
-          type: actionTypes.GET_USER,
-          payload: manufacturer
-        });
-      });
+  }
 }
 
 const registerOrganSuccess = organ => (dispatch) => {

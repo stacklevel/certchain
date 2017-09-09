@@ -25,7 +25,7 @@ const {
 } = constants;
 
 export const initialState = {
-  user: null,
+  currentUser: null,
   manufacturers: {},
   auditors: {},
   organs: {},
@@ -98,9 +98,9 @@ export default createReducer(initialState, {
     //   organ: payload,
     // })
   },
-  [GET_USER]: (state, payload) => 
+  [GET_USER]: (state, payload) =>
     Object.assign({}, state, {
-      manufacturer: payload,
+      currentUser: payload,
     }),
   [GET_MANUFACTURER_SUCCESS]: (state, payload) => {
     let data = payload.manufacturer;
