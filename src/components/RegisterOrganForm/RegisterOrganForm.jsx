@@ -44,7 +44,9 @@ class RegisterOrganForm extends Component {
   }
 
   handleSubmit() {
-    console.log(this.state);
+    const { companyName, address, phone, email } = this.state;
+
+    this.props.registerOrgan([companyName, address, phone, email]);
   }
 
   render() {

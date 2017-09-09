@@ -31,3 +31,19 @@ const registerAuditorFailure = errors => ({
 export const registerAuditor = params => (dispatch) => {
   dispatch(registerAuditorSuccess(params));
 };
+
+const registerOrganSuccess = organ => (dispatch) => {
+  dispatch({
+    type: actionTypes.REGISTER_ORGAN_SUCCESS,
+    payload: { organ },
+  });
+};
+
+const registerOrganFailure = errors => ({
+  type: actionTypes.REGISTER_ORGAN_FAILURE,
+  payload: { errors },
+});
+
+export const registerOrgan = params => (dispatch) => {
+  dispatch(registerOrganSuccess(params));
+};
