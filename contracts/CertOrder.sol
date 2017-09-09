@@ -29,30 +29,33 @@ contract CertOrder {
     mapping (address => certOrder) public certOrderInfo;
 
 
-    function register (bytes32 certInfo) {
+    function register (bytes32 certInfo, bytes32 secretInformation) {
         certOrderInfo[msg.sender].certInfo = certInfo;
+        certOrderInfo[msg.sender].secretInformation = secretInformation;
 
         certOrderInfo[msg.sender].nextAddr = headAddr;
         headAddr = msg.sender;
     }
 
 
-    function getByAddress(address manufacturerAddress) constant returns (bytes32, address,
-                                                                        address, address, address, address, address) {
+    function getByAddress(address manufacturerAddress) constant returns (bytes32 certInfo, address nextAddr,
+                                                                        address appliedAuditor1, address appliedAuditor2,
+                                                                        address appliedAuditor3, address appliedAuditor4,
+                                                                        address appliedAuditor5, address selectedAuditor) {
 
 
-    return (certOrderInfo[manufacturerAddress].certInfo,
-            certOrderInfo[manufacturerAddress].nextAddr,
-            certOrderInfo[manufacturerAddress].appliedAuditor1,
-            certOrderInfo[manufacturerAddress].appliedAuditor2,
-            certOrderInfo[manufacturerAddress].appliedAuditor3,
-            certOrderInfo[manufacturerAddress].appliedAuditor4,
-            certOrderInfo[manufacturerAddress].appliedAuditor5
-        );
+     certInfo = certOrderInfo[manufacturerAddress].certInfo;
+     nextAddr = certOrderInfo[manufacturerAddress].nextAddr;
+     appliedAuditor1 = certOrderInfo[manufacturerAddress].appliedAuditor1;
+     appliedAuditor2 = certOrderInfo[manufacturerAddress].appliedAuditor2;
+     appliedAuditor3 = certOrderInfo[manufacturerAddress].appliedAuditor3;
+     appliedAuditor4 = certOrderInfo[manufacturerAddress].appliedAuditor4;
+     appliedAuditor5 = certOrderInfo[manufacturerAddress].appliedAuditor5;
+     selectedAuditor = certOrderInfo[manufacturerAddress].selectedAuditor;
 
     }
 
-    function apply(address manufacturerAddress, address auditorContractAddr) returns (bool res){
+    function apply(address manufacturerAddress, address auditorContractAddr) returns (bool){
         Auditor a = Auditor(auditorContractAddr);
 
         bytes32 name;
@@ -66,7 +69,7 @@ contract CertOrder {
 
         if(certInfo == certOrderInfo[manufacturerAddress].certInfo){
 
-            res = true;
+            bool res = true;
             if (certOrderInfo[manufacturerAddress].appliedAuditor1 == address(0)){
                 certOrderInfo[manufacturerAddress].appliedAuditor1 = msg.sender;
             }else if (certOrderInfo[manufacturerAddress].appliedAuditor2 == address(0)){
@@ -83,6 +86,9 @@ contract CertOrder {
         }else{
             res = false;
         }
+
+        return res;
+
     }
 
     function selectAuditor(address auditorAddress){
@@ -110,7 +116,7 @@ contract CertOrder {
 
     function setAuditorResolution(address manufacturerAddress, bytes32 resolution){
         if (certOrderInfo[manufacturerAddress].selectedAuditor == msg.sender){
-            certOrderInfo[manufacturerAddress].auditorResolution == resolution;
+            certOrderInfo[manufacturerAddress].auditorResolution = resolution;
         }
 
     }
