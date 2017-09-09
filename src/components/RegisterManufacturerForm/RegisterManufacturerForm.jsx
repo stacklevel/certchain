@@ -28,6 +28,7 @@ class RegisterManufacturerForm extends Component {
       'handleInputChange',
       'handleSelectChange',
       'handleSubmit',
+      'handleGetAll'
     ]);
   }
 
@@ -47,6 +48,10 @@ class RegisterManufacturerForm extends Component {
     const { companyName, scope, products, address, account, bankName, phone, email } = this.state;
 
     this.props.registerManufacturer([companyName, scope, products, address, bankName, account, phone, email]);
+  }
+
+  handleGetAll() {
+    this.props.getAllManufacturers();
   }
 
   render() {
@@ -78,7 +83,7 @@ class RegisterManufacturerForm extends Component {
                   onChange={this.handleInputChange}
                 />
               </FormItem>
-              <FormItem label="Scope of activity">  
+              <FormItem label="Scope of activity">
                 <Select
                   className="Form__select"
                   placeholder="Please select scope"
@@ -159,6 +164,13 @@ class RegisterManufacturerForm extends Component {
                 onClick={this.handleSubmit}
               >
                 Register
+              </Button>
+              <Button
+                className="RegisterManufacturerForm__button"
+                type="default"
+                onClick={this.handleGetAll}
+              >
+                Get all
               </Button>
             </div>
           </Col>
