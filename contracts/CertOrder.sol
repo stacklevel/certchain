@@ -5,6 +5,12 @@ import "../contracts/Auditor.sol";
 
 contract CertOrder {
 
+    address auditorContractAddress;
+
+    function CertOrder(address auditorContractAddr){
+        auditorContractAddress = auditorContractAddr;
+    }
+
     struct certOrder {
         bytes32 certInfo;
         address appliedAuditor1;
@@ -55,8 +61,8 @@ contract CertOrder {
 
     }
 
-    function apply(address manufacturerAddress, address auditorContractAddr) returns (bool){
-        Auditor a = Auditor(auditorContractAddr);
+    function apply(address manufacturerAddress) returns (bool){
+        Auditor auditorContract = Auditor(auditorContractAddress);
 
         bytes32 name;
         bytes32 education;
@@ -65,7 +71,7 @@ contract CertOrder {
         bytes32 email;
         address nextAuditorAddress;
 
-        (name, education, certInfo, phoneNumber, email, nextAuditorAddress) = a.getByAddress(msg.sender);
+        (name, education, certInfo, phoneNumber, email, nextAuditorAddress) = auditorContract.getByAddress(msg.sender);
 
         if(certInfo == certOrderInfo[manufacturerAddress].certInfo){
 
