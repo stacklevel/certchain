@@ -13,7 +13,5 @@ const registerManufacturerFailure = errors => ({
 });
 
 export const registerManufacturer = params => (dispatch) => {
-  dispatch()
-    .then(response => dispatch(registerManufacturerSuccess(response.news)))
-    .catch(error => dispatch(registerManufacturerFailure(error.response)));
+  dispatch(registerManufacturerSuccess(params));
 };

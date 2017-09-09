@@ -2,9 +2,9 @@ import { default as Web3 } from 'web3';
 import { default as contract } from 'truffle-contract';
 
 
-// import storage_artifacts from '../../build/contracts/SimpleStorage.json';
+import manufacturer_artifacts from '../../build/contracts/Manufacturer.json';
 
-// const SimpleStorage = contract(storage_artifacts);
+const Manufacturer = contract(manufacturer_artifacts);
 
 const initialState = {
   data: null,
@@ -20,7 +20,7 @@ if (typeof window.web3 !== 'undefined') {
   window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 }
 
-// SimpleStorage.setProvider(window.web3.currentProvider);
+Manufacturer.setProvider(window.web3.currentProvider);
 
 const userReducer = (state = initialState, action) => {
   if (action.type === 'USER_LOGGED_IN')
@@ -39,7 +39,7 @@ const userReducer = (state = initialState, action) => {
 
   if (action.type === 'SIMPLE_STORAGE_TEST')
   {
-    let simpleStorageInstance;
+    // let simpleStorageInstance;
 
     // return SimpleStorage.deployed().then(function(instance) {
     //   simpleStorageInstance = instance;
