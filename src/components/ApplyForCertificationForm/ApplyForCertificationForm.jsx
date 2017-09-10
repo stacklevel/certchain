@@ -32,10 +32,10 @@ class ApplyForCertificationForm extends Component {
     this.handleApply = this.handleApply.bind(this);
     this.handleResolve = this.handleResolve.bind(this);
     this.handleRegister = this.handleRegister.bind(this);
+    this.handleAuditorSelect = this.handleAuditorSelect.bind(this);
   }
 
   componentWillMount() {
-    // this.props.getAllCertOrders();
     this.props.getUser();
     this.props.getAll();
   }
@@ -65,16 +65,23 @@ class ApplyForCertificationForm extends Component {
 
   handleSelectChange(certificationInfo) {
     this.setState({
-      certificationInfo
+      certification: {
+        ...this.state.certification,
+        certificationInfo
+      }
     });
   }
 
-  handleApply() {
-    // this.props.registerForCertification(this.state.certification);
+  handleAuditorSelect(auditorAddress) {
+    this.props.selectAuditorForCertification(auditorAddress);
   }
 
-  handleResolve() {
+  handleApply(manufacturerAddress) {
+    this.props.applyForCertification(manufacturerAddress, 10);
+  }
 
+  handleResolve(manufacturerAddress) {
+    this.props.setAuditorResolutionForCertification(manufacturerAddress, 'Resolved!');
   }
 
   handleRegister() {
@@ -141,12 +148,12 @@ class ApplyForCertificationForm extends Component {
             return auditors[user] && (
               <div>
               {
-                userType === 'manufacturer' ? 
+                userType === 'manufacturer' ?
                   (
                     <div className='applied-auditor' key={index}>
                       <p>{auditors[user].name}&nbsp;&nbsp;&nbsp;</p>
 
-                      <Button><Icon type='check'></Icon></Button>
+                      <Button onClick={this.handleAuditorSelect.bind(this, user)}><Icon type='check'></Icon></Button>
                     </div>
                   ) :
                   (<div key={index}>{auditors[user].name}</div>)
@@ -167,18 +174,18 @@ class ApplyForCertificationForm extends Component {
       {
         title: 'Actions',
         dataIndex: 'action',
-        render: (text, record) => 
+        render: (text, record) =>
         {
-          if(text === 'resolve'){
+          if(text.action === 'resolve'){
             return (
               <div className='icon-block'>
-                <Button type='success' onClick={this.handleResolve}>Resolve</Button>
+                <Button type='success' onClick={this.handleResolve.bind(this, text.key)}>Resolve</Button>
               </div>
             );
-          } else if(text === 'apply') {
+          } else if(text.action === 'apply') {
             return (
               <div className='icon-block'>
-                <Button type='primary' onClick={this.handleApply}>Apply</Button>
+                <Button type='primary' onClick={this.handleApply.bind(this, text.key)}>Apply</Button>
               </div>
             );
           } else {
@@ -207,7 +214,7 @@ class ApplyForCertificationForm extends Component {
       } else if(userType === 'auditor' && !auditorName.length) {
         action = 'apply';
       }
-      
+
       dataSource.push({
         name: manufacturers[key].name,
         scope: manufacturers[key].scope,
@@ -226,7 +233,7 @@ class ApplyForCertificationForm extends Component {
         ],
         selectedAuditor: auditorName,
         certInfo: certOrders[key].certInfo,
-        action: action,
+        action: [{ action, key }]
       });
     });
 
