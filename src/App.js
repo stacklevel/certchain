@@ -6,10 +6,10 @@ import { Layout, Menu, LocaleProvider, Button } from 'antd';
 import enUS from 'antd/lib/locale-provider/en_US';
 const { Header, Content, Footer } = Layout;
 
-
 const imageSrc = './img/logo.svg';
 
 class App extends Component {
+  
   render() {
     return (
       <LocaleProvider locale={enUS}>

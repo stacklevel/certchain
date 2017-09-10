@@ -4,6 +4,7 @@ import actionTypes from '../constants';
 import manufacturer_artifacts from '../../build/contracts/Manufacturer.json';
 import auditor_artifacts from '../../build/contracts/Auditor.json';
 import organ_artifacts from '../../build/contracts/Organ.json'
+import cert_artifacts from '../../build/contracts/CertOrder.json'
 
 import { default as Web3 } from 'web3';
 import { isNull } from 'lodash';
@@ -21,10 +22,12 @@ window.web3.eth.defaultAccount = window.web3.eth.accounts[0];
 const Manufacturer = contract(manufacturer_artifacts);
 const Auditor = contract(auditor_artifacts);
 const Organ = contract(organ_artifacts);
+const CertOrder = contract(cert_artifacts);
 
 Manufacturer.setProvider(window.web3.currentProvider);
 Auditor.setProvider(window.web3.currentProvider);
 Organ.setProvider(window.web3.currentProvider);
+CertOrder.setProvider(window.web3.currentProvider);
 
 // --------------------------------------------------------------
 
@@ -222,3 +225,12 @@ const registerOrganFailure = errors => ({
 export const registerOrgan = params => (dispatch) => {
   dispatch(registerOrganSuccess(params));
 };
+
+export function registerForCertification(params) {
+  return async function(dispatch) {
+    const currentAddress = window.web3.eth.defaultAccount;
+
+    const orderInstance = await CertOrder.deployed();
+    const orderRegister = await orderInstance.register(...params, { from: currentAddress }); 
+  }
+}

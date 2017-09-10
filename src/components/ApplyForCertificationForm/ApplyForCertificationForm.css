@@ -1,0 +1,26 @@
+
+.ApplyForCertificationForm .ant-menu-item {
+  border-right: 3px solid transparent;
+}
+
+.ApplyForCertificationForm .ant-menu-item-selected, .ApplyForCertificationForm .ant-menu-item:hover {
+  border-right: 3px solid #35b4f2;
+}
+
+.ApplyForCertificationForm__table {
+  padding: 20px 90px;
+  /* border: 1px solid #eee; */
+}
+
+.ApplyForCertificationForm__buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.ApplyForCertificationForm__title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #000;
+  padding: 10px 0;
+  text-transform: uppercase;
+}

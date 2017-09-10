@@ -26,6 +26,7 @@ const {
 
 export const initialState = {
   currentUser: null,
+  userType: null,
   manufacturers: {},
   auditors: {},
   organs: {},
@@ -101,6 +102,7 @@ export default createReducer(initialState, {
   [GET_USER]: (state, payload) =>
     Object.assign({}, state, {
       currentUser: payload,
+      userType: payload[window.web3.eth.accounts[0]].role
     }),
   [GET_MANUFACTURER_SUCCESS]: (state, payload) => {
     let data = payload.manufacturer;

@@ -25,6 +25,7 @@ import RegisterAuditorContainer from './containers/RegisterAuditorContainer';
 import RegisterOrganContainer from './containers/RegisterOrganContainer';
 import DashboardContainer from './containers/DashboardContainer.jsx';
 import ApplyContainer from './containers/ApplyContainer.jsx';
+import ApplyForCertificationContainer from './containers/ApplyForCertificationContainer.jsx';
 
 // Redux Store
 import store from './store'
@@ -40,8 +41,8 @@ ReactDOM.render((
           <Route path="register-auditor" component={RegisterAuditorContainer} /> 
           <Route path="register-organ" component={RegisterOrganContainer} />
           <Route path="dashboard" component={DashboardContainer} />
-          <Route path="apply" component={ApplyContainer} />
-          
+          <Route path="apply" component={ApplyForCertificationContainer} />
+          <Route path="settings" component={ApplyContainer} />
         </Route>
       </Router>
     </Provider>

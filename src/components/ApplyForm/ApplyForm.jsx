@@ -48,7 +48,7 @@ class ApplyForm extends Component {
       <div className='ApplyForm'>
         <Row>
           <Col span={4}>
-            <Menu defaultSelectedKeys={['2']}>
+            <Menu defaultSelectedKeys={['5']}>
               <Menu.Item style={{ fontSize: 14 }} key='1'>
                 <Link to='dashboard'><Icon type="user" style={{ fontSize: 16 }} />Profile</Link>
               </Menu.Item>
