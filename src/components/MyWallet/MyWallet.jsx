@@ -60,7 +60,7 @@ class MyWallet extends Component {
             <Row style={{ display: 'flex', justifyContent: 'center', flexDirection:'column', alignItems: 'center' }}>
                <div className="MyWallet__title">My Balance</div> 
               <div className="MyWallet__coin">
-                <p className="coin-sum">{accountBalance || 0}</p>
+                <p className="coin-sum">{accountBalance === 0 ? 0 : accountBalance.toNumber()/1e8}</p>
                 <p className="coin-title">CRT</p>
               </div>
             </Row>
