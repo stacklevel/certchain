@@ -72,107 +72,110 @@ class RegisterManufacturerForm extends Component {
         <Row>
           <Col span={6} />
           <Col span={12}>
-            <InputGroup size="large">
-              <FormItem label="Company name">
-                <Input
-                  className="Form__input"
-                  size="large"
-                  placeholder="Company name"
-                  name='companyName'
-                  value={companyName}
-                  onChange={this.handleInputChange}
-                />
-              </FormItem>
-              <FormItem label="Scope of activity">
-                <Select
-                  className="Form__select"
-                  placeholder="Please select scope"
-                  onChange={this.handleSelectChange}
-                  defaultValue={scope}
-                >
-                  <Option value="Medicine">Medicine</Option>
-                  <Option value="Industry">Industry</Option>
-                  <Option value="IT">IT</Option>
-                  <Option value="Consulting">Consulting</Option>
-                </Select>
-              </FormItem>
-              <FormItem label="Products">
-                <Input
-                  className="Form__input"
-                  size="large"
-                  placeholder="Products"
-                  name='products'
-                  value={products}
-                  onChange={this.handleInputChange}
-                />
-              </FormItem>
-              <FormItem label="Address">
-                <Input
-                  className="Form__input"
-                  size="large"
-                  placeholder="Address"
-                  name='address'
-                  value={address}
-                  onChange={this.handleInputChange}
-                />
-              </FormItem>
-              <FormItem label="uniqNumber">
-                <Input
-                  className="Form__input"
-                  size="large"
-                  placeholder="uniqNumber"
-                  name='uniqNumber'
-                  value={uniqNumber}
-                  onChange={this.handleInputChange}
-                />
-              </FormItem>
-              <FormItem label="Bank name">
-                <Input
-                  className="Form__input"
-                  size="large"
-                  placeholder="Bank name"
-                  name='bankName'
-                  value={bankName}
-                  onChange={this.handleInputChange}
-                />
-              </FormItem>
-              <FormItem label="Phone number">
-                <Input
-                  className="Form__input"
-                  size="large"
-                  placeholder="Phone number"
-                  name='phone'
-                  value={phone}
-                  onChange={this.handleInputChange}
-                />
-              </FormItem>
-              <FormItem label="Email">
-                <Input
-                  className="Form__input"
-                  size="large"
-                  placeholder="Email"
-                  name='email'
-                  value={email}
-                  onChange={this.handleInputChange}
-                />
-              </FormItem>
-            </InputGroup>
-            <div className="RegisterManufacturerForm__button-block">
-              <Button
-                className="RegisterManufacturerForm__button"
-                type="primary"
-                onClick={this.handleSubmit}
-              >
-                Register
-              </Button>
-              <Button
-                className="RegisterManufacturerForm__button"
-                type="default"
-                onClick={this.handleGetAll}
-              >
-                Get all
-              </Button>
-            </div>
+            <Form onSubmit={this.handleSubmit}>
+              <InputGroup size="large">
+                <FormItem label="Company name">
+                  <Input
+                    className="Form__input"
+                    size="large"
+                    placeholder="Company name"
+                    name='companyName'
+                    value={companyName}
+                    onChange={this.handleInputChange}
+                    required
+                  />
+                </FormItem>
+                <FormItem label="Scope of activity">
+                  <Select
+                    className="Form__select"
+                    placeholder="Please select scope"
+                    onChange={this.handleSelectChange}
+                    defaultValue={scope}
+                    required
+                  >
+                    <Option value="Medicine">Medicine</Option>
+                    <Option value="Industry">Industry</Option>
+                    <Option value="IT">IT</Option>
+                    <Option value="Consulting">Consulting</Option>
+                  </Select>
+                </FormItem>
+                <FormItem label="Products">
+                  <Input
+                    className="Form__input"
+                    size="large"
+                    placeholder="Products"
+                    name='products'
+                    value={products}
+                    onChange={this.handleInputChange}
+                    required
+                  />
+                </FormItem>
+                <FormItem label="Address">
+                  <Input
+                    className="Form__input"
+                    size="large"
+                    placeholder="Address"
+                    name='address'
+                    value={address}
+                    onChange={this.handleInputChange}
+                    required
+                  />
+                </FormItem>
+                <FormItem label="uniqNumber">
+                  <Input
+                    className="Form__input"
+                    size="large"
+                    placeholder="uniqNumber"
+                    name='uniqNumber'
+                    value={uniqNumber}
+                    onChange={this.handleInputChange}
+                    required
+                  />
+                </FormItem>
+                <FormItem label="Bank name">
+                  <Input
+                    className="Form__input"
+                    size="large"
+                    placeholder="Bank name"
+                    name='bankName'
+                    value={bankName}
+                    onChange={this.handleInputChange}
+                    required
+                  />
+                </FormItem>
+                <FormItem label="Phone number">
+                  <Input
+                    className="Form__input"
+                    size="large"
+                    placeholder="Phone number"
+                    name='phone'
+                    value={phone}
+                    onChange={this.handleInputChange}
+                    required
+                  />
+                </FormItem>
+                <FormItem label="Email">
+                  <Input
+                    className="Form__input"
+                    size="large"
+                    placeholder="Email"
+                    name='email'
+                    value={email}
+                    onChange={this.handleInputChange}
+                    required
+                  />
+                </FormItem>
+              </InputGroup>
+                <div className="RegisterManufacturerForm__button-block">
+                  <Button
+                    className="RegisterManufacturerForm__button"
+                    type="primary"
+                    htmlType="submit"
+                  >
+                    Register
+                  </Button>
+                </div>
+            </Form>
           </Col>
         </Row>
       </div>

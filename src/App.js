@@ -35,10 +35,12 @@ class App extends Component {
                 <Menu.Item key="3"><Link to='certification-bodies'>Certification Body</Link></Menu.Item>
                 <Menu.Item key="4"><Link to='dashboard'>Dashboard</Link></Menu.Item>
               </Menu>
-               <div className="Button__group"> 
-                <Button ghost>Sign Up</Button>
-                <Button type="primary">Log In</Button>
-               </div> 
+              <div className="Button__group"> 
+                <Link to='sign-up'>
+                  <Button ghost>Sign Up</Button>
+                </Link>
+              {/* <Button type="primary">Log In</Button> */}
+              </div> 
             </div>
           </Header>  
           <Content style={{ width: 1200, alignSelf: 'center', padding: '0 50px' }}>

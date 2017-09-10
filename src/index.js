@@ -29,6 +29,7 @@ import ApplyForCertificationContainer from './containers/ApplyForCertificationCo
 import CompaniesListDemoContainer from './containers/CompaniesListDemoContainer.jsx';
 import AuditorsListDemoContainer from './containers/AuditorsListDemoContainer.jsx';
 import OrgansListDemoContainer from './containers/OrgansListDemoContainer.jsx';
+import SignUpButtons from './components/SignUpButtons/SignUpButtons.jsx';
 
 // Redux Store
 import store from './store'
@@ -49,6 +50,7 @@ ReactDOM.render((
           <Route path="manufacturers" component={CompaniesListDemoContainer} />
           <Route path="auditors" component={AuditorsListDemoContainer} />
           <Route path="certification-bodies" component={OrgansListDemoContainer} />
+          <Route path="sign-up" component={SignUpButtons} />
         </Route>
       </Router>
     </Provider>

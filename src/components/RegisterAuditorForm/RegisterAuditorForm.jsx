@@ -126,118 +126,119 @@ class RegisterAuditorForm extends Component {
         <Row>
           <Col span={6} />
           <Col span={12}>
-            <InputGroup size="large">
-              <FormItem label="Full name">
-                <Input
-                  className="Form__input"
-                  size="large"
-                  placeholder="Full name"
-                  name='fullName'
-                  value={fullName}
-                  onChange={this.handleInputChange}
-                />
-              </FormItem>
-              <FormItem
-                label="Audit direction"
-              >
-                <Select
-                  className="Form__select"
-                  placeholder="Please select direction"
-                  onChange={this.handleSelectChange}
-                  defaultValue={direction}
+            <Form onSubmit={this.handleSubmit}>
+              <InputGroup size="large">
+                <FormItem label="Full name">
+                  <Input
+                    className="Form__input"
+                    size="large"
+                    placeholder="Full name"
+                    name='fullName'
+                    value={fullName}
+                    onChange={this.handleInputChange}
+                    required
+                  />
+                </FormItem>
+                <FormItem
+                  label="Audit direction"
                 >
-                  <Option value="ISO 9001">ISO 9001</Option>
-                  <Option value="ISO 13485">ISO 13485</Option>
-                  <Option value="CE">CE</Option>
-                </Select>
-              </FormItem>
-              <FormItem
-                label="Education"
-              >
-                <div className="Form__inline">
-                  <DatePicker
-                    format="YYYY-MM-DD"
-                    value={trainingDate}
-                    onChange={this.handleTrainingDateChange}
-                  />
+                  <Select
+                    className="Form__select"
+                    placeholder="Please select direction"
+                    onChange={this.handleSelectChange}
+                    defaultValue={direction}
+                    required
+                  >
+                    <Option value="ISO 9001">ISO 9001</Option>
+                    <Option value="ISO 13485">ISO 13485</Option>
+                    <Option value="CE">CE</Option>
+                  </Select>
+                </FormItem>
+                <FormItem
+                  label="Education"
+                >
+                  <div className="Form__inline">
+                    <DatePicker
+                      format="YYYY-MM-DD"
+                      value={trainingDate}
+                      onChange={this.handleTrainingDateChange}
+                    />
+                    <Input
+                      className="Form__input"
+                      size="large"
+                      placeholder="Organization name"
+                      name='trainingOrganization'
+                      value={trainingOrganization}
+                      onChange={this.handleInputChange}
+                      required
+                    />
+                  </div>
+                </FormItem>
+                <FormItem
+                  label="Certification document"
+                >
+                  <div className="Form__inline">
+                    <DatePicker
+                      format="YYYY-MM-DD"
+                      value={certificationDate}
+                      onChange={this.handleCertificationDateChange}
+                    />
+                    <Input
+                      className="Form__input"
+                      size="large"
+                      placeholder="Organization name"
+                      name='certificationOrganization'
+                      value={certificationOrganization}
+                      onChange={this.handleInputChange}
+                      required
+                    />
+                  </div>
+                  <Upload {...props} name="certification" listType="picture" onChange={this.handleFileChange}>
+                    <Button>
+                      <Icon type="upload" /> Upload
+                    </Button>
+                  </Upload>
+                </FormItem>
+                <FormItem label="Phone number">
                   <Input
                     className="Form__input"
                     size="large"
-                    placeholder="Organization name"
-                    name='trainingOrganization'
-                    value={trainingOrganization}
+                    placeholder="Phone number"
+                    name='phone'
+                    value={phone}
                     onChange={this.handleInputChange}
+                    required
                   />
-                </div>
-              </FormItem>
-              <FormItem
-                label="Certification document"
-              >
-                <div className="Form__inline">
-                  <DatePicker
-                    format="YYYY-MM-DD"
-                    value={certificationDate}
-                    onChange={this.handleCertificationDateChange}
-                  />
+                </FormItem>
+                <FormItem label="Email">
                   <Input
                     className="Form__input"
                     size="large"
-                    placeholder="Organization name"
-                    name='certificationOrganization'
-                    value={certificationOrganization}
+                    placeholder="Email"
+                    name='email'
+                    value={email}
                     onChange={this.handleInputChange}
+                    required
                   />
-                </div>
-                <Upload {...props} name="certification" listType="picture" onChange={this.handleFileChange}>
-                  <Button>
-                    <Icon type="upload" /> Upload
-                  </Button>
-                </Upload>
-              </FormItem>
-              <FormItem label="Phone number">
-                <Input
-                  className="Form__input"
-                  size="large"
-                  placeholder="Phone number"
-                  name='phone'
-                  value={phone}
-                  onChange={this.handleInputChange}
-                />
-              </FormItem>
-              <FormItem label="Email">
-                <Input
-                  className="Form__input"
-                  size="large"
-                  placeholder="Email"
-                  name='email'
-                  value={email}
-                  onChange={this.handleInputChange}
-                />
-              </FormItem>
-            </InputGroup>
-            <div className="RegisterAuditorForm__button-block">
-              <Button
-                className="RegisterAuditorForm__button"
-                type="primary"
-                onClick={this.handleSubmit}
-              >
-                Register
-              </Button>
-              <Button
-                className="RegisterAuditorForm__button"
-                type="default"
-                onClick={this.handleGetAll}
-              >
-                Get all
-              </Button>
-              <Button
-                className="RegisterAuditorForm__button"
-                type="default"
-                onClick={this.handleApprove}
-              >
-                Approve - 10 CRT
-              </Button>
-            </div>
+                </FormItem>
+              </InputGroup>
+              <div className="RegisterAuditorForm__button-block">
+                <Button
+                  className="RegisterAuditorForm__button"
+                  type="primary"
+                  htmlType="submit"
+                >
+                  Register
+                </Button>
+                <Button
+                  className="RegisterAuditorForm__button"
+                  type="default"
+                  onClick={this.handleApprove}
+                >
+                  Approve - 10 CRT
+                </Button>
+              </div>
+            </Form>
           </Col>
         </Row>
       </div>
