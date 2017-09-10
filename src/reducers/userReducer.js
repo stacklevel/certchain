@@ -41,7 +41,7 @@ export default createReducer(initialState, {
     return Manufacturer.deployed().then(function(instance) {
       manufacturerInstance = instance;
 
-      return manufacturerInstance.register(...payload.manufacturer, { from: window.web3.eth.accounts[0] });
+      return manufacturerInstance.register(...payload.manufacturer);
     }).then(function() {
       return manufacturerInstance.getByAddress(window.web3.eth.accounts[0]);
     }).then(function(storedData) {

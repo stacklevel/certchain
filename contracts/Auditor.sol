@@ -1,8 +1,8 @@
 pragma solidity ^0.4.4;
 
+import "./CertCoin.sol";
 
 contract Auditor {
-
     struct auditor {
         bytes32 name;
         bytes32 education;
@@ -12,11 +12,17 @@ contract Auditor {
         address nextAddr;
     }
 
+    address certCoinContractAddress;
+
     mapping (address => auditor) public auditorInfo;
     address public headAddr;
 
+    function Auditor(address certCoinAddr) {
+        certCoinContractAddress = certCoinAddr;
+    }
 
     function register(bytes32 name, bytes32 education, bytes32 certInfo, bytes32 phoneNumber, bytes32 email) {
+        CertCoin certCoinContract = CertCoin(certCoinContractAddress);
 
         /* require(auditorInfo[msg.sender].name == ""); */
 
@@ -28,6 +34,8 @@ contract Auditor {
 
         auditorInfo[msg.sender].nextAddr = headAddr;
         headAddr = msg.sender;
+
+        certCoinContract.transferFrom(msg.sender, this, 10);
     }
 
 
