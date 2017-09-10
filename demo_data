@@ -9,8 +9,8 @@ CertCoin.deployed().then(i => i.transfer(web3.eth.accounts[6], 11e8, { from: web
 
 // GET Manufacturer contract address
 // Manufacturer.deployed().then(i => i.address)
-CertCoin.deployed().then(i => i.approve('0xbeff387f85837877a6499aa4403c7397a40ba414', 10e8, { from: web3.eth.accounts[1]}));
-CertCoin.deployed().then(i => i.approve('0xbeff387f85837877a6499aa4403c7397a40ba414', 10e8, { from: web3.eth.accounts[2]}));
+CertCoin.deployed().then(i => i.approve('0xd4c3e64e5925a91ccd4f096817370436a8645fdb', 10e8, { from: web3.eth.accounts[1]}));
+CertCoin.deployed().then(i => i.approve('0xd4c3e64e5925a91ccd4f096817370436a8645fdb', 10e8, { from: web3.eth.accounts[2]}));
 
 Manufacturer.deployed().then(i => i.register("Burn", "Food & drinks", "Burn", "Imaguru", "Priorbank","1234567890","+375(44)462-20-40","burn@gmail.com",{from: web3.eth.accounts[1]}));
 Manufacturer.deployed().then(i => i.register("Rich", "Food & drinks", "Juice", "Imaguru", "Alfa-bank","0987654321","+375(29)123-45-67","rich@gmail.com",{from: web3.eth.accounts[2]}));
@@ -18,9 +18,9 @@ Manufacturer.deployed().then(i => i.register("Rich", "Food & drinks", "Juice", "
 
 // GET Auditor contract address
 // Auditor.deployed().then(i => i.address)
-CertCoin.deployed().then(i => i.approve('0xbeff387f85837877a6499aa4403c7397a40ba414', 10e8, { from: web3.eth.accounts[2]}));
-CertCoin.deployed().then(i => i.approve('0xbeff387f85837877a6499aa4403c7397a40ba414', 10e8, { from: web3.eth.accounts[3]}));
-CertCoin.deployed().then(i => i.approve('0xbeff387f85837877a6499aa4403c7397a40ba414', 10e8, { from: web3.eth.accounts[4]}));
+CertCoin.deployed().then(i => i.approve('0x954d128a3961ebe5574c43547d6e0dfa5ce43dea', 10e8, { from: web3.eth.accounts[2]}));
+CertCoin.deployed().then(i => i.approve('0x954d128a3961ebe5574c43547d6e0dfa5ce43dea', 10e8, { from: web3.eth.accounts[3]}));
+CertCoin.deployed().then(i => i.approve('0x954d128a3961ebe5574c43547d6e0dfa5ce43dea', 10e8, { from: web3.eth.accounts[4]}));
 
 
 Auditor.deployed().then(i => i.register("Eugene", "BSUIR", "ISO9001","+375(29)789-65-67","eugene_bsuir@gmail.com",{from: web3.eth.accounts[2]}));

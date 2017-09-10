@@ -298,3 +298,18 @@ export const getAll = () => (dispatch) => {
   dispatch(getAllOrgans());
   dispatch(getAllCertOrders());
 }
+
+export function getAccountBalance(addr = window.web3.eth.defaultAccount) {
+  return async function(dispatch) {
+    let instance  = await CertCoin.deployed();
+
+    const accountBalance = await instance.balanceOf(addr, { from: addr }); 
+    
+    console.log(accountBalance);
+
+    dispatch({
+      type: actionTypes.GET_BALANCE_SUCCESS,
+      payload: accountBalance,
+    });
+  }
+}

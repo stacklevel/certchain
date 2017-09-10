@@ -29,6 +29,7 @@ import ApplyForCertificationContainer from './containers/ApplyForCertificationCo
 import CompaniesListDemoContainer from './containers/CompaniesListDemoContainer.jsx';
 import AuditorsListDemoContainer from './containers/AuditorsListDemoContainer.jsx';
 import OrgansListDemoContainer from './containers/OrgansListDemoContainer.jsx';
+import MyWalletContainer from './containers/MyWalletContainer.jsx';
 import SignUpButtons from './components/SignUpButtons/SignUpButtons.jsx';
 
 // Redux Store
@@ -51,6 +52,7 @@ ReactDOM.render((
           <Route path="auditors" component={AuditorsListDemoContainer} />
           <Route path="certification-bodies" component={OrgansListDemoContainer} />
           <Route path="sign-up" component={SignUpButtons} />
+          <Route path="wallet" component={MyWalletContainer} />
         </Route>
       </Router>
     </Provider>

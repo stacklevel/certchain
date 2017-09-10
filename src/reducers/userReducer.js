@@ -23,6 +23,7 @@ const {
   GET_AUDITOR_SUCCESS,
   GET_ORGAN_SUCCESS,
   GET_CERT_ORDER_SUCCESS,
+  GET_BALANCE_SUCCESS,
 } = constants;
 
 export const initialState = {
@@ -32,6 +33,7 @@ export const initialState = {
   auditors: {},
   organs: {},
   certOrders: {},
+  accountBalance: null,
 };
 
 export default createReducer(initialState, {
@@ -129,5 +131,10 @@ export default createReducer(initialState, {
     return Object.assign({}, state, {
       certOrders: Object.assign({}, state.certOrders, data)
     });
+  }, 
+  [GET_BALANCE_SUCCESS]: (state, payload) => {
+    return Object.assign({}, state, {
+      accountBalance: payload,
+    })
   }
 });
