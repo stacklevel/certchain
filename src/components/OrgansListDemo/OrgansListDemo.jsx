@@ -65,7 +65,8 @@ class OrgansListDemo extends React.Component {
     return (
       <div>
         <h2 style={{textAlign: 'center', margin: '20px 0'}}>Certification Bodies</h2>
-        <Table bordered dataSource={dataSource} columns={columns} />
+        <Table bordered dataSource={dataSource} columns={columns}
+          pagination={this.props.pagination} />
       </div>
     );
   }
