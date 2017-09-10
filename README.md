@@ -4,7 +4,7 @@ HOW TO RUN
 
 1) setup http://truffleframework.com
 2) setup and run testrpc
-3) run truffle migrate
+3) truffle migrate
 4) npm run start
 5) spread tokens
 open truffle console and run:
