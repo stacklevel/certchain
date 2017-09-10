@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import ApplyForCertificationForm from '../components/ApplyForCertificationForm/ApplyForCertificationForm';
-import { registerForCertification, getUser, getAllCertOrders, getAll } from '../actions/';
+import { setAuditorResolutionForCertification, applyForCertification, selectAuditorForCertification, registerForCertification, getUser, getAll } from '../actions/';
 
 const mapStateToProps = state => ({
   userType: state.user.userType,
@@ -13,12 +13,14 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   registerForCertification: bindActionCreators(registerForCertification, dispatch),
+  selectAuditorForCertification: bindActionCreators(selectAuditorForCertification, dispatch),
+  applyForCertification: bindActionCreators(applyForCertification, dispatch),
+  setAuditorResolutionForCertification: bindActionCreators(setAuditorResolutionForCertification, dispatch),
   getUser: bindActionCreators(getUser, dispatch),
-  getAllCertOrders: bindActionCreators(getAllCertOrders, dispatch),
   getAll: bindActionCreators(getAll, dispatch),
 });
 
-const ApplyContainer = 
+const ApplyContainer =
   connect(mapStateToProps, mapDispatchToProps)(ApplyForCertificationForm);
 
 export default ApplyContainer;

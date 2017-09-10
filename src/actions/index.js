@@ -241,17 +241,7 @@ export const registerOrgan = params => (dispatch) => {
   dispatch(registerOrganSuccess(params));
 };
 
-export function registerForCertification(params) {
-  return async function(dispatch) {
-    const currentAddress = window.web3.eth.defaultAccount;
-
-    const orderInstance = await CertOrder.deployed();
-    const orderRegister = await orderInstance.register(...params, { from: currentAddress }); 
-  }
-}
-
 // -----------------------------------------------------
-
 
 const getCertOrderSuccess = certOrder => (dispatch) => {
   dispatch({
@@ -292,6 +282,8 @@ export function getAllCertOrders() {
   }
 }
 
+// -----------------------------------------------------
+
 export const getAll = () => (dispatch) => {
   dispatch(getAllManufacturers());
   dispatch(getAllAuditors());
@@ -311,5 +303,38 @@ export function getAccountBalance(addr = window.web3.eth.defaultAccount) {
       type: actionTypes.GET_BALANCE_SUCCESS,
       payload: accountBalance,
     });
+  }
+}
+// -----------------------------------------------------
+
+export function registerForCertification(params) {
+  return async function(dispatch) {
+    const orderInstance = await CertOrder.deployed();
+    const register = await orderInstance.register(params.certificationInfo, params.secretInfo);
+    console.log(register);
+  }
+}
+
+export function applyForCertification(manufacturerAddress, offer) {
+  return async function(dispatch) {
+    const orderInstance = await CertOrder.deployed();
+    const apply = await orderInstance.apply(manufacturerAddress, offer);
+    console.log(apply);
+  }
+}
+
+export function selectAuditorForCertification(auditorAddress) {
+  return async function(dispatch) {
+    const orderInstance = await CertOrder.deployed();
+    const selectAuditor = await orderInstance.selectAuditor(auditorAddress);
+    console.log(selectAuditor);
+  }
+}
+
+export function setAuditorResolutionForCertification(manufacturerAddress, resolution) {
+  return async function(dispatch) {
+    const orderInstance = await CertOrder.deployed();
+    const setAuditorResolution = await orderInstance.setAuditorResolution(manufacturerAddress, resolution);
+    console.log(setAuditorResolution);
   }
 }
