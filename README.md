@@ -8,6 +8,7 @@ HOW TO RUN
 4) npm run start
 5) spread tokens
 open truffle console and run:
+
 CertCoin.deployed().then(i => i.transfer(web3.eth.accounts[1], 12e8, { from: web3.eth.accounts[0]}));
 CertCoin.deployed().then(i => i.transfer(web3.eth.accounts[2], 13e8, { from: web3.eth.accounts[0]}));
 CertCoin.deployed().then(i => i.transfer(web3.eth.accounts[3], 15e8, { from: web3.eth.accounts[0]}));
