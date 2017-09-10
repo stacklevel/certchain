@@ -176,6 +176,7 @@ class ApplyForCertificationForm extends Component {
         dataIndex: 'action',
         render: (text, record) =>
         {
+          console.log(text, record)
           if(text.action === 'resolve'){
             return (
               <div className='icon-block'>
@@ -233,7 +234,7 @@ class ApplyForCertificationForm extends Component {
         ],
         selectedAuditor: auditorName,
         certInfo: certOrders[key].certInfo,
-        action: [{ action, key }]
+        action: { action, key }
       });
     });
 
@@ -279,7 +280,7 @@ class ApplyForCertificationForm extends Component {
               <div className="ApplyForCertificationForm__table">
                 <Col span='6'></Col>
                 <Col span='12'>
-                  <div className="ApplyForCertificationForm__title">Apply for Certification</div>
+                  <div className="ApplyForCertificationForm__title">Register Certification</div>
                   <FormItem
                     label="Certification info"
                   >

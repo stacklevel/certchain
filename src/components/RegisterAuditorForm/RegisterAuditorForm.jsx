@@ -73,8 +73,8 @@ class RegisterAuditorForm extends Component {
     }
   }
 
-  handleSubmit() {
-    console.log(this.state);
+  handleSubmit(e) {
+    e.preventDefault();
 
     const {
       fullName,

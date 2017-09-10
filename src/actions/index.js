@@ -74,7 +74,7 @@ export function getAllManufacturers() {
   }
 }
 
-export function approveTransaction() {
+export function approveAuditorTransaction() {
   return async function(dispatch) {
     let instance = await CertCoin.deployed();
     let auditor = await Auditor.deployed();
@@ -84,6 +84,25 @@ export function approveTransaction() {
   }
 }
 
+export function approveManufacturerTransaction() {
+  return async function(dispatch) {
+    let instance = await CertCoin.deployed();
+    let manufacturer = await Manufacturer.deployed();
+    let address = await manufacturer.address;
+    let response = await instance.approve(address, 10e8, { from: window.web3.eth.accounts[0] });
+    console.log(address, response);
+  }
+}
+
+export function approveOrganTransaction() {
+  return async function(dispatch) {
+    let instance = await CertCoin.deployed();
+    let organ = await Organ.deployed();
+    let address = await organ.address;
+    let response = await instance.approve(address, 10e8, { from: window.web3.eth.accounts[0] });
+    console.log(address, response);
+  }
+}
 // --------------------------------------------------------------
 
 const getAuditorSuccess = auditor => (dispatch) => {
@@ -310,7 +329,7 @@ export function getAccountBalance(addr = window.web3.eth.defaultAccount) {
 export function registerForCertification(params) {
   return async function(dispatch) {
     const orderInstance = await CertOrder.deployed();
-    const register = await orderInstance.register(params.certificationInfo, params.secretInfo);
+    const register = await orderInstance.register(params.certificationInfo, params.secretInfo, { from: window.web3.eth.accounts[0] });
     console.log(register);
   }
 }
@@ -318,7 +337,7 @@ export function registerForCertification(params) {
 export function applyForCertification(manufacturerAddress, offer) {
   return async function(dispatch) {
     const orderInstance = await CertOrder.deployed();
-    const apply = await orderInstance.apply(manufacturerAddress, offer);
+    const apply = await orderInstance.apply(manufacturerAddress, offer, { from: window.web3.eth.accounts[0] });
     console.log(apply);
   }
 }
@@ -326,7 +345,7 @@ export function applyForCertification(manufacturerAddress, offer) {
 export function selectAuditorForCertification(auditorAddress) {
   return async function(dispatch) {
     const orderInstance = await CertOrder.deployed();
-    const selectAuditor = await orderInstance.selectAuditor(auditorAddress);
+    const selectAuditor = await orderInstance.selectAuditor(auditorAddress, { from: window.web3.eth.accounts[0] });
     console.log(selectAuditor);
   }
 }
@@ -334,7 +353,7 @@ export function selectAuditorForCertification(auditorAddress) {
 export function setAuditorResolutionForCertification(manufacturerAddress, resolution) {
   return async function(dispatch) {
     const orderInstance = await CertOrder.deployed();
-    const setAuditorResolution = await orderInstance.setAuditorResolution(manufacturerAddress, resolution);
+    const setAuditorResolution = await orderInstance.setAuditorResolution(manufacturerAddress, resolution, { from: window.web3.eth.accounts[0] });
     console.log(setAuditorResolution);
   }
 }

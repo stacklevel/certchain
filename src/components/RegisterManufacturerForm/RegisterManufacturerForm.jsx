@@ -29,6 +29,7 @@ class RegisterManufacturerForm extends Component {
       'handleSelectChange',
       'handleSubmit',
       'handleGetAll',
+      'handleApprove',
     ]);
   }
 
@@ -44,7 +45,13 @@ class RegisterManufacturerForm extends Component {
     this.setState({ scope });
   }
 
-  handleSubmit() {
+  handleApprove() {
+    this.props.approveTransaction();
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+
     const { companyName, scope, products, address, uniqNumber, bankName, phone, email } = this.state;
 
     this.props.registerManufacturer([companyName, scope, products, address, bankName, uniqNumber, phone, email]);
@@ -174,6 +181,13 @@ class RegisterManufacturerForm extends Component {
                   >
                     Register
                   </Button>
+                <Button
+                  className="RegisterAuditorForm__button"
+                  type="default"
+                  onClick={this.handleApprove}
+                >
+                  Approve - 10 CRT
+                </Button>
                 </div>
             </Form>
           </Col>

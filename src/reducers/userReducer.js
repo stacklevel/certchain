@@ -45,7 +45,7 @@ export default createReducer(initialState, {
     return Manufacturer.deployed().then(function(instance) {
       manufacturerInstance = instance;
 
-      return manufacturerInstance.register(...payload.manufacturer);
+      return manufacturerInstance.register(...payload.manufacturer, { from: window.web3.eth.accounts[0] });
     }).then(function() {
       return manufacturerInstance.getByAddress(window.web3.eth.accounts[0]);
     }).then(function(storedData) {
@@ -60,11 +60,9 @@ export default createReducer(initialState, {
     console.log(payload);
 
     let auditorInstance;
-    // debugger;
 
     return Auditor.deployed().then(function(instance) {
       auditorInstance = instance;
-
       return auditorInstance.register(...payload.auditor, { from: window.web3.eth.accounts[0] });
     }).then(function() {
       return auditorInstance.getByAddress(window.web3.eth.accounts[0]);

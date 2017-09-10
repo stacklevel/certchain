@@ -25,6 +25,7 @@ class RegisterOrganForm extends Component {
       'handleFileChange',
       'handleSubmit',
       'handleGetAll',
+      'handleApprove',
     ]);
   }
 
@@ -44,7 +45,13 @@ class RegisterOrganForm extends Component {
     }
   }
 
-  handleSubmit() {
+  handleApprove() {
+    this.props.approveTransaction();
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+
     const { companyName, address, phone, email } = this.state;
 
     this.props.registerOrgan([companyName, address, phone, email]);
@@ -135,6 +142,13 @@ class RegisterOrganForm extends Component {
                   htmlType="submit"
                 >
                   Register
+                </Button>
+                <Button
+                  className="RegisterOrganForm__button"
+                  type="default"
+                  onClick={this.handleApprove}
+                >
+                  Approve - 10 CRT
                 </Button>
               </div>
             </Form>
