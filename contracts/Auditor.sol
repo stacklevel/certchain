@@ -12,10 +12,9 @@ contract Auditor {
         address nextAddr;
     }
 
-    address certCoinContractAddress;
-
     mapping (address => auditor) public auditorInfo;
     address public headAddr;
+    address certCoinContractAddress;
 
     uint registrationHold = 1000000000;
     function Auditor(address certCoinAddr) {

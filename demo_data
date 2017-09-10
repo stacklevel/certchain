@@ -9,8 +9,17 @@ CertCoin.deployed().then(i => i.transfer(web3.eth.accounts[6], 11e8, { from: web
 
 // GET Manufacturer contract address
 // Manufacturer.deployed().then(i => i.address)
+<<<<<<< HEAD
 CertCoin.deployed().then(i => i.approve('0xd4c3e64e5925a91ccd4f096817370436a8645fdb', 10e8, { from: web3.eth.accounts[1]}));
 CertCoin.deployed().then(i => i.approve('0xd4c3e64e5925a91ccd4f096817370436a8645fdb', 10e8, { from: web3.eth.accounts[2]}));
+=======
+CertCoin.deployed().then(i => i.approve('0x746fa6bf95c2ffef59bed2e5b389fc155b96a249', 10e8, { from: web3.eth.accounts[1]}));
+CertCoin.deployed().then(i => i.approve('0x746fa6bf95c2ffef59bed2e5b389fc155b96a249', 10e8, { from: web3.eth.accounts[2]}));
+
+
+// GET CercoinAddr
+// CertCoin.deployed().then(i => i.address)
+>>>>>>> baea2a2cc5c20643937467e106ee0c78a419fdbe
 
 Manufacturer.deployed().then(i => i.register("Burn", "Food & drinks", "Burn", "Imaguru", "Priorbank","1234567890","+375(44)462-20-40","burn@gmail.com",{from: web3.eth.accounts[1]}));
 Manufacturer.deployed().then(i => i.register("Rich", "Food & drinks", "Juice", "Imaguru", "Alfa-bank","0987654321","+375(29)123-45-67","rich@gmail.com",{from: web3.eth.accounts[2]}));
@@ -18,9 +27,15 @@ Manufacturer.deployed().then(i => i.register("Rich", "Food & drinks", "Juice", "
 
 // GET Auditor contract address
 // Auditor.deployed().then(i => i.address)
+<<<<<<< HEAD
 CertCoin.deployed().then(i => i.approve('0x954d128a3961ebe5574c43547d6e0dfa5ce43dea', 10e8, { from: web3.eth.accounts[2]}));
 CertCoin.deployed().then(i => i.approve('0x954d128a3961ebe5574c43547d6e0dfa5ce43dea', 10e8, { from: web3.eth.accounts[3]}));
 CertCoin.deployed().then(i => i.approve('0x954d128a3961ebe5574c43547d6e0dfa5ce43dea', 10e8, { from: web3.eth.accounts[4]}));
+=======
+CertCoin.deployed().then(i => i.approve('0x37fc75ff3497c81df4e0ba72b6066eab855791d4', 10e8, { from: web3.eth.accounts[2]}));
+CertCoin.deployed().then(i => i.approve('0x37fc75ff3497c81df4e0ba72b6066eab855791d4', 10e8, { from: web3.eth.accounts[3]}));
+CertCoin.deployed().then(i => i.approve('0x37fc75ff3497c81df4e0ba72b6066eab855791d4', 10e8, { from: web3.eth.accounts[4]}));
+>>>>>>> baea2a2cc5c20643937467e106ee0c78a419fdbe
 
 
 Auditor.deployed().then(i => i.register("Eugene", "BSUIR", "ISO9001","+375(29)789-65-67","eugene_bsuir@gmail.com",{from: web3.eth.accounts[2]}));
@@ -30,8 +45,8 @@ Auditor.deployed().then(i => i.register("Nicolas", "BSEU", "ISO9001","+375(29)78
 Organ.deployed().then(i => i.register("British Standards Institution", "United Kingdom", "+375(29)789-11-22","british@gmail.com",{from: web3.eth.accounts[5]}));
 Organ.deployed().then(i => i.register("CEPREI Certification Body", "China", "+375(29)789-11-22","cerpei@gmail.com",{from: web3.eth.accounts[6]}));
 
-CertOrder.deployed().then(i => i.register('ISO9001','some secret1', {from: web3.eth.accounts[0]}))
-CertOrder.deployed().then(i => i.register('ISO9001','some secret2',{from: web3.eth.accounts[1]}))
+CertOrder.deployed().then(i => i.register('ISO9001','some secret1', {from: web3.eth.accounts[1]}))
+CertOrder.deployed().then(i => i.register('ISO9001','some secret2',{from: web3.eth.accounts[2]}))
 
 CertOrder.deployed().then(i => i.getByAddress(web3.eth.accounts[0]))
 

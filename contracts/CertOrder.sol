@@ -8,8 +8,8 @@ contract CertOrder {
     address auditorContractAddress;
     address certCoinContractAddress;
 
-    function CertOrder(address certCoinAddr, address auditorContractAddr){
-        certCoinContractAddress = certCoinAddr;
+    function CertOrder(address certCoinContractAddr, address auditorContractAddr) {
+        certCoinContractAddress = certCoinContractAddr;
         auditorContractAddress = auditorContractAddr;
     }
 
@@ -110,16 +110,25 @@ contract CertOrder {
 
     }
 
-    function selectAuditor(address auditorAddress){
-        if (certOrderInfo[msg.sender].appliedAuditor1 == auditorAddress ||
-            certOrderInfo[msg.sender].appliedAuditor2 == auditorAddress ||
-            certOrderInfo[msg.sender].appliedAuditor3 == auditorAddress ||
-            certOrderInfo[msg.sender].appliedAuditor4 == auditorAddress ||
-            certOrderInfo[msg.sender].appliedAuditor5 == auditorAddress){
-
-            certOrderInfo[msg.sender].selectedAuditor = auditorAddress;
-
+    function selectAuditor(address auditorAddress) returns (bool success){
+        CertCoin certCoinContract = CertCoin(certCoinContractAddress);
+        uint amount;
+        if (certOrderInfo[msg.sender].appliedAuditor1 == auditorAddress){
+            amount = auditorOffersInfo[msg.sender].offer1;
+        }else if (certOrderInfo[msg.sender].appliedAuditor2 == auditorAddress){
+            amount = auditorOffersInfo[msg.sender].offer2;
+        }else if (certOrderInfo[msg.sender].appliedAuditor3 == auditorAddress){
+            amount = auditorOffersInfo[msg.sender].offer3;
+        }else if (certOrderInfo[msg.sender].appliedAuditor4 == auditorAddress){
+            amount = auditorOffersInfo[msg.sender].offer4;
+        }else if (certOrderInfo[msg.sender].appliedAuditor5 == auditorAddress){
+            amount = auditorOffersInfo[msg.sender].offer5;
         }
+        if(certCoinContract.transferFrom(msg.sender, this, amount)){
+            certOrderInfo[msg.sender].selectedAuditor = auditorAddress;
+        return true;
+        }
+
     }
 
     function getAuditorOffers(address manufacturerAddress) constant returns(uint a1, uint a2, uint a3, uint a4, uint a5){
@@ -129,7 +138,6 @@ contract CertOrder {
         a4 =auditorOffersInfo[manufacturerAddress].offer4;
         a5 =auditorOffersInfo[manufacturerAddress].offer5;
     }
-
 
     function getSelectedAuditor(address manufacturerAddress) constant returns (address){
         return certOrderInfo[manufacturerAddress].selectedAuditor;
