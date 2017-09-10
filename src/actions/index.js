@@ -77,9 +77,10 @@ export function getAllManufacturers() {
 export function approveTransaction() {
   return async function(dispatch) {
     let instance = await CertCoin.deployed();
-    let creator = await instance.creator();
-    let response = await instance.approve(creator, 10, { from: window.web3.eth.accounts[0] });
-    console.log(creator, response);
+    let auditor = await Auditor.deployed();
+    let address = await auditor.address;
+    let response = await instance.approve(address, 10e8, { from: window.web3.eth.accounts[0] });
+    console.log(address, response);
   }
 }
 
