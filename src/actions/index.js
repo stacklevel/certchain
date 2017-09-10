@@ -4,7 +4,8 @@ import actionTypes from '../constants';
 import manufacturer_artifacts from '../../build/contracts/Manufacturer.json';
 import auditor_artifacts from '../../build/contracts/Auditor.json';
 import organ_artifacts from '../../build/contracts/Organ.json'
-import cert_artifacts from '../../build/contracts/CertOrder.json'
+import certorder_artifacts from '../../build/contracts/CertOrder.json'
+import certcoin_artifacts from '../../build/contracts/CertCoin.json';
 
 import { default as Web3 } from 'web3';
 import { isNull } from 'lodash';
@@ -22,12 +23,16 @@ window.web3.eth.defaultAccount = window.web3.eth.accounts[0];
 const Manufacturer = contract(manufacturer_artifacts);
 const Auditor = contract(auditor_artifacts);
 const Organ = contract(organ_artifacts);
-const CertOrder = contract(cert_artifacts);
+const CertOrder = contract(certorder_artifacts);
+const CertCoin = contract(certcoin_artifacts);
 
 Manufacturer.setProvider(window.web3.currentProvider);
 Auditor.setProvider(window.web3.currentProvider);
 Organ.setProvider(window.web3.currentProvider);
 CertOrder.setProvider(window.web3.currentProvider);
+CertCoin.setProvider(window.web3.currentProvider);
+
+window.web3.eth.defaultAccount = window.web3.eth.accounts[0];
 
 // --------------------------------------------------------------
 
@@ -66,6 +71,15 @@ export function getAllManufacturers() {
       dispatch(getManufacturerSuccess(parseManufacturer(current, response)));
       current = response[response.length - 1];
     }
+  }
+}
+
+export function approveTransaction() {
+  return async function(dispatch) {
+    let instance = await CertCoin.deployed();
+    let creator = await instance.creator();
+    let response = await instance.approve(creator, 10, { from: window.web3.eth.accounts[0] });
+    console.log(creator, response);
   }
 }
 

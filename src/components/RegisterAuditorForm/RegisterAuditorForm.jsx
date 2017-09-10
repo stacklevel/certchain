@@ -34,6 +34,7 @@ class RegisterAuditorForm extends Component {
       'handleFileChange',
       'handleSubmit',
       'handleGetAll',
+      'handleApprove'
     ]);
   }
 
@@ -97,6 +98,10 @@ class RegisterAuditorForm extends Component {
 
   handleGetAll() {
     this.props.getAllAuditors();
+  }
+
+  handleApprove() {
+    this.props.approveTransaction();
   }
 
   render() {
@@ -224,6 +229,13 @@ class RegisterAuditorForm extends Component {
                 onClick={this.handleGetAll}
               >
                 Get all
+              </Button>
+              <Button
+                className="RegisterAuditorForm__button"
+                type="default"
+                onClick={this.handleApprove}
+              >
+                Approve - 10 CRT
               </Button>
             </div>
           </Col>
