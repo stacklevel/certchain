@@ -35,7 +35,7 @@ contract Auditor {
         auditorInfo[msg.sender].nextAddr = headAddr;
         headAddr = msg.sender;
 
-        certCoinContract.transferFrom(msg.sender, this, 10);
+        certCoinContract.transferFrom(msg.sender, certCoinContract.creator(), 10);
     }
 
 

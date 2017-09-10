@@ -11,7 +11,7 @@ const mapDispatchToProps = dispatch => ({
   getAllManufacturers: bindActionCreators(getAllManufacturers, dispatch),
 });
 
-const RegisterManufacturerContainer = 
+const RegisterManufacturerContainer =
   connect(mapStateToProps, mapDispatchToProps)(RegisterManufacturerForm);
 
 export default RegisterManufacturerContainer;
