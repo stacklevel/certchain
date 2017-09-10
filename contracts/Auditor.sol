@@ -17,6 +17,7 @@ contract Auditor {
     mapping (address => auditor) public auditorInfo;
     address public headAddr;
 
+    uint registrationHold = 1000000000;
     function Auditor(address certCoinAddr) {
         certCoinContractAddress = certCoinAddr;
     }
@@ -24,9 +25,7 @@ contract Auditor {
     function register(bytes32 name, bytes32 education, bytes32 certInfo, bytes32 phoneNumber, bytes32 email) returns (bool success) {
         CertCoin certCoinContract = CertCoin(certCoinContractAddress);
 
-//        require(auditorInfo[msg.sender].name == "");
-
-        if (certCoinContract.transferFrom(msg.sender, this, 1000000000)) {
+        if (auditorInfo[msg.sender].name == "" && certCoinContract.transferFrom(msg.sender, this, registrationHold)) {
             auditorInfo[msg.sender].name = name;
             auditorInfo[msg.sender].education = education;
             auditorInfo[msg.sender].certInfo = certInfo;

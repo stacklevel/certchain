@@ -6,8 +6,10 @@ import "../contracts/Auditor.sol";
 contract CertOrder {
 
     address auditorContractAddress;
+    address certCoinContractAddress;
 
-    function CertOrder(address auditorContractAddr){
+    function CertOrder(address certCoinAddr, address auditorContractAddr){
+        certCoinContractAddress = certCoinAddr;
         auditorContractAddress = auditorContractAddr;
     }
 
@@ -20,7 +22,6 @@ contract CertOrder {
         address appliedAuditor5;
 
         address selectedAuditor;
-
         bytes32 secretInformation;
         bytes32 auditorResolution;
 
@@ -28,11 +29,18 @@ contract CertOrder {
 
     }
 
+    struct auditorOffers{
+        uint offer1;
+        uint offer2;
+        uint offer3;
+        uint offer4;
+        uint offer5;
+    }
+
     address public headAddr;
 
-
-
     mapping (address => certOrder) public certOrderInfo;
+    mapping (address => auditorOffers) public auditorOffersInfo;
 
 
     function register (bytes32 certInfo, bytes32 secretInformation) {
@@ -61,7 +69,7 @@ contract CertOrder {
 
     }
 
-    function apply(address manufacturerAddress) returns (bool){
+    function apply(address manufacturerAddress, uint offer) returns (bool){
         Auditor auditorContract = Auditor(auditorContractAddress);
 
         bytes32 name;
@@ -78,14 +86,19 @@ contract CertOrder {
             bool res = true;
             if (certOrderInfo[manufacturerAddress].appliedAuditor1 == address(0)){
                 certOrderInfo[manufacturerAddress].appliedAuditor1 = msg.sender;
+                auditorOffersInfo[manufacturerAddress].offer1 = offer;
             }else if (certOrderInfo[manufacturerAddress].appliedAuditor2 == address(0)){
                 certOrderInfo[manufacturerAddress].appliedAuditor2 = msg.sender;
+                auditorOffersInfo[manufacturerAddress].offer2 = offer;
             }else if (certOrderInfo[manufacturerAddress].appliedAuditor3 == address(0)){
                 certOrderInfo[manufacturerAddress].appliedAuditor3 = msg.sender;
+                auditorOffersInfo[manufacturerAddress].offer3 = offer;
             }else if (certOrderInfo[manufacturerAddress].appliedAuditor4 == address(0)){
                 certOrderInfo[manufacturerAddress].appliedAuditor4 = msg.sender;
+                auditorOffersInfo[manufacturerAddress].offer4 = offer;
             }else if (certOrderInfo[manufacturerAddress].appliedAuditor5 == address(0)){
                 certOrderInfo[manufacturerAddress].appliedAuditor5 = msg.sender;
+                auditorOffersInfo[manufacturerAddress].offer5 = offer;
             }else{
                 res = false;
             }
@@ -107,6 +120,14 @@ contract CertOrder {
             certOrderInfo[msg.sender].selectedAuditor = auditorAddress;
 
         }
+    }
+
+    function getAuditorOffers(address manufacturerAddress) constant returns(uint a1, uint a2, uint a3, uint a4, uint a5){
+        a1 =auditorOffersInfo[manufacturerAddress].offer1;
+        a2 =auditorOffersInfo[manufacturerAddress].offer2;
+        a3 =auditorOffersInfo[manufacturerAddress].offer3;
+        a4 =auditorOffersInfo[manufacturerAddress].offer4;
+        a5 =auditorOffersInfo[manufacturerAddress].offer5;
     }
 
 
