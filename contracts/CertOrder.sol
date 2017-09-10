@@ -8,8 +8,8 @@ contract CertOrder {
     address auditorContractAddress;
     address certCoinContractAddress;
 
-    function CertOrder(address certCoinAddr, address auditorContractAddr){
-        certCoinContractAddress = certCoinAddr;
+    function CertOrder(address certCoinContractAddr, address auditorContractAddr) {
+        certCoinContractAddress = certCoinContractAddr;
         auditorContractAddress = auditorContractAddr;
     }
 

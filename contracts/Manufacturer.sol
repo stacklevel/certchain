@@ -16,10 +16,14 @@ contract Manufacturer {
         bytes32 email;
         address nextAddr;
     }
-    address certCoinContractAddress;
 
     mapping (address => manufacturer) public manufacturerInfo;
     address public headAddr;
+    address certCoinContractAddress;
+
+    function Manufacturer(address certCoinAddr) {
+        certCoinContractAddress = certCoinAddr;
+    }
 
     uint registrationHold = 1000000000;
 
