@@ -234,3 +234,52 @@ export function registerForCertification(params) {
     const orderRegister = await orderInstance.register(...params, { from: currentAddress }); 
   }
 }
+
+// -----------------------------------------------------
+
+
+const getCertOrderSuccess = certOrder => (dispatch) => {
+  dispatch({
+    type: actionTypes.GET_CERT_ORDER_SUCCESS,
+    payload: { certOrder },
+  });
+};
+
+const parseCertOrder = (address, data) => {
+  let parsedData = data.map(e => window.web3.toAscii(e).replace(/\u0000/g, ''))
+  return {
+    [address]: {
+      certInfo: parsedData[0],
+      appliedAuditor1: data[2],
+      appliedAuditor2: data[3],
+      appliedAuditor3: data[4],
+      appliedAuditor4: data[5],
+      appliedAuditor5: data[6],
+      selectedAuditor: data[7],
+      nextAddr: data[1],
+    }
+  };
+}
+
+export function getAllCertOrders() {
+  return async function(dispatch) {
+    let instance = await CertOrder.deployed();
+    let head = await instance.headAddr();
+    let current = head;
+
+    console.log(head);
+
+    while (parseInt(current) !== 0) {
+      let response = await instance.getByAddress(current);
+      dispatch(getCertOrderSuccess(parseCertOrder(current, response)));
+      current = response[1];
+    }
+  }
+}
+
+export const getAll = () => (dispatch) => {
+  dispatch(getAllManufacturers());
+  dispatch(getAllAuditors());
+  dispatch(getAllOrgans());
+  dispatch(getAllCertOrders());
+}

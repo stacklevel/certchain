@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import ApplyForCertificationForm from '../components/ApplyForCertificationForm/ApplyForCertificationForm';
+import CompaniesListDemo from '../components/CompaniesListDemo/CompaniesListDemo';
 import { registerForCertification, getUser, getAllCertOrders, getAll } from '../actions/';
 
 const mapStateToProps = state => ({
@@ -18,7 +18,7 @@ const mapDispatchToProps = dispatch => ({
   getAll: bindActionCreators(getAll, dispatch),
 });
 
-const ApplyContainer = 
-  connect(mapStateToProps, mapDispatchToProps)(ApplyForCertificationForm);
+const CompaniesListDemoContainer = 
+  connect(mapStateToProps, mapDispatchToProps)(CompaniesListDemo);
 
-export default ApplyContainer;
+export default CompaniesListDemoContainer;

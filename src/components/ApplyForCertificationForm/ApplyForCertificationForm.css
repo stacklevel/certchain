@@ -24,3 +24,25 @@
   padding: 10px 0;
   text-transform: uppercase;
 }
+
+.ApplyForCertificationForm table tbody td {
+  vertical-align: top;
+}
+
+.applied-auditor {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.applied-auditor:not(:first-child):not(:last-child) {
+  padding: 3px 0;
+}
+
+.applied-auditor:first-child {
+  padding-bottom: 3px;
+}
+
+.applied-auditor:last-child {
+  padding-top: 3px;
+}

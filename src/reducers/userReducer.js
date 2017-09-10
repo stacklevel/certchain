@@ -21,7 +21,8 @@ const {
   REGISTER_ORGAN_SUCCESS,
   GET_MANUFACTURER_SUCCESS,
   GET_AUDITOR_SUCCESS,
-  GET_ORGAN_SUCCESS
+  GET_ORGAN_SUCCESS,
+  GET_CERT_ORDER_SUCCESS,
 } = constants;
 
 export const initialState = {
@@ -30,6 +31,7 @@ export const initialState = {
   manufacturers: {},
   auditors: {},
   organs: {},
+  certOrders: {},
 };
 
 export default createReducer(initialState, {
@@ -120,6 +122,12 @@ export default createReducer(initialState, {
     let data = payload.organ;
     return Object.assign({}, state, {
       organs: Object.assign({}, state.organs, data)
+    });
+  },
+  [GET_CERT_ORDER_SUCCESS]: (state, payload) => {
+    let data = payload.certOrder;
+    return Object.assign({}, state, {
+      certOrders: Object.assign({}, state.certOrders, data)
     });
   }
 });
