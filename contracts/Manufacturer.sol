@@ -23,7 +23,7 @@ contract Manufacturer {
 
     uint registrationHold = 1000000000;
 
-    function Manufacturer(address certCoinAddr){
+    function setCertcoinAddr(address certCoinAddr){
         certCoinContractAddress = certCoinAddr;
     }
 
