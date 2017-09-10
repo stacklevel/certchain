@@ -21,21 +21,23 @@ contract Auditor {
         certCoinContractAddress = certCoinAddr;
     }
 
-    function register(bytes32 name, bytes32 education, bytes32 certInfo, bytes32 phoneNumber, bytes32 email) {
+    function register(bytes32 name, bytes32 education, bytes32 certInfo, bytes32 phoneNumber, bytes32 email) returns (bool success) {
         CertCoin certCoinContract = CertCoin(certCoinContractAddress);
 
-        /* require(auditorInfo[msg.sender].name == ""); */
+//        require(auditorInfo[msg.sender].name == "");
 
-        auditorInfo[msg.sender].name = name;
-        auditorInfo[msg.sender].education = education;
-        auditorInfo[msg.sender].certInfo = certInfo;
-        auditorInfo[msg.sender].phoneNumber = phoneNumber;
-        auditorInfo[msg.sender].email = email;
+        if (certCoinContract.transferFrom(msg.sender, this, 10)){
+            auditorInfo[msg.sender].name = name;
+            auditorInfo[msg.sender].education = education;
+            auditorInfo[msg.sender].certInfo = certInfo;
+            auditorInfo[msg.sender].phoneNumber = phoneNumber;
+            auditorInfo[msg.sender].email = email;
 
-        auditorInfo[msg.sender].nextAddr = headAddr;
-        headAddr = msg.sender;
+            auditorInfo[msg.sender].nextAddr = headAddr;
+            headAddr = msg.sender;
+            return true;
+        }
 
-        certCoinContract.transferFrom(msg.sender, certCoinContract.creator(), 10);
     }
 
 

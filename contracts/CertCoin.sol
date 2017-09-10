@@ -10,7 +10,6 @@ contract CertCoin {
     string public symbol;
     uint8 public decimals;
     uint256 public totalSupply;
-    address public creator;
 
     /* This creates an array with all balances */
     mapping (address => uint256) public balanceOf;
@@ -23,19 +22,13 @@ contract CertCoin {
     event Burn(address indexed from, uint256 value);
 
     /* Initializes contract with initial supply tokens to the creator of the contract */
-    function CertCoin(
-        uint256 initialSupply,
-        string tokenName,
-        uint8 decimalUnits,
-        string tokenSymbol,
-        address daddy
-    ) {
-        balanceOf[daddy] = initialSupply;                 // Give the creator all initial tokens
-        totalSupply = initialSupply;                        // Update total supply
-        name = tokenName;                                   // Set the name for display purposes
-        symbol = tokenSymbol;                               // Set the symbol for display purposes
-        decimals = decimalUnits;                            // Amount of decimals for display purposes
-        creator = daddy;
+    function CertCoin() {
+
+        balanceOf[msg.sender] = 10000000000;                   // Give the creator all initial tokens
+        totalSupply = 10000000000;                             // Update total supply
+        name = 'CertCoin';                                   // Set the name for display purposes
+        symbol = 'CRT';                                // Set the symbol for display purposes
+        decimals =  8;                             // Amount of decimals for display purposes
     }
 
     /* Internal transfer, only can be called by this contract */

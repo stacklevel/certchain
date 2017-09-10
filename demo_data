@@ -22,5 +22,5 @@ CertOrder.deployed().then(i => i.getSecretInformation(web3.eth.accounts[0]))
 
 
 
-
+Auditor.deployed()
 
