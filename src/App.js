@@ -1,51 +1,60 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
-import { HiddenOnlyAuth, VisibleOnlyAuth } from './util/wrappers.js'
+import './App.css';
 
-// UI Components
-import LoginButtonContainer from './user/ui/loginbutton/LoginButtonContainer'
-import LogoutButtonContainer from './user/ui/logoutbutton/LogoutButtonContainer'
+import { Layout, Menu, LocaleProvider, Button } from 'antd';
+import enUS from 'antd/lib/locale-provider/en_US';
+const { Header, Content, Footer } = Layout;
 
-// Styles
-import './css/oswald.css'
-import './css/open-sans.css'
-import './css/pure-min.css'
-import './App.css'
+const imageSrc = './img/logo.svg';
 
 class App extends Component {
+  
   render() {
-    const OnlyAuthLinks = VisibleOnlyAuth(() =>
-      <span>
-        <li className="pure-menu-item">
-          <Link to="/dashboard" className="pure-menu-link">Dashboard</Link>
-        </li>
-        <li className="pure-menu-item">
-          <Link to="/profile" className="pure-menu-link">Profile</Link>
-        </li>
-        <LogoutButtonContainer />
-      </span>
-    )
-
-    const OnlyGuestLinks = HiddenOnlyAuth(() =>
-      <span>
-        <LoginButtonContainer />
-      </span>
-    )
-
     return (
-      <div className="App">
-        <nav className="navbar pure-menu pure-menu-horizontal">
-          <Link to="/" className="pure-menu-heading pure-menu-link">Truffle Box</Link>
-          <ul className="pure-menu-list navbar-right">
-            <OnlyGuestLinks />
-            <OnlyAuthLinks />
-          </ul>
-        </nav>
-
-        {this.props.children}
-      </div>
+      <LocaleProvider locale={enUS}>
+        <Layout className="layout">
+          <Header>
+            <Link to='/'>
+              <div className="logo">
+                <img src={imageSrc} alt="certchain"/>
+                <div className='logo__text'>Blockchain Certification Network</div>
+              </div> 
+            </Link>
+            <div className="right__menu">
+              <Menu
+                theme="dark"
+                mode="horizontal"
+                style={{ lineHeight: '64px' }}
+              >
+                {/* <Menu.Item key="1"><Link to='register-manufacturer'>Manufacturer</Link></Menu.Item> */}
+                <Menu.Item key="1"><Link to='manufacturers'>Manufacturer</Link></Menu.Item>
+                {/* <Menu.Item key="2"><Link to='register-auditor'>Auditor</Link></Menu.Item> */}
+                <Menu.Item key="2"><Link to='auditors'>Auditor</Link></Menu.Item>
+                {/* <Menu.Item key="3"><Link to='register-organ'>Certification Body</Link></Menu.Item> */}
+                <Menu.Item key="3"><Link to='certification-bodies'>Certification Body</Link></Menu.Item>
+                <Menu.Item key="4"><Link to='dashboard'>Dashboard</Link></Menu.Item>
+              </Menu>
+              <div className="Button__group"> 
+                <Link to='sign-up'>
+                  <Button ghost>Sign Up</Button>
+                </Link>
+              {/* <Button type="primary">Log In</Button> */}
+              </div> 
+            </div>
+          </Header>  
+          <Content style={{ width: 1200, alignSelf: 'center', padding: '0 50px' }}>
+            <div style={{ background: '#fff', padding: 24, minHeight: '86vh' }}>
+              {this.props.children}
+            </div>
+          </Content>
+          <Footer style={{ textAlign: 'center' }}>
+            Certchain.io ©2017
+          </Footer>
+        </Layout>
+      </LocaleProvider>
     );
   }
 }
 
-export default App
+export default App;

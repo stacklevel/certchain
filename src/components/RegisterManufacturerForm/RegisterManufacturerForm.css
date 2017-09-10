@@ -1,0 +1,18 @@
+.RegisterManufacturerForm__button {
+    border: 1px solid #fff;
+    border-radius: 50px;
+    display: inline-block;
+    max-width: 300px;
+    height: 35px;
+    text-align: center;
+    font-style: normal;
+    letter-spacing: 1px;
+    font-size: 14px;
+    font-weight: 300;
+    transition: .5s;
+}
+
+.RegisterManufacturerForm__button-block {
+  margin: 10px 0;
+  text-align: center;
+}

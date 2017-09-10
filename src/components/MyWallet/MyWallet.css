@@ -1,0 +1,52 @@
+
+.MyWallet .ant-menu-item {
+  border-right: 3px solid transparent;
+}
+
+.MyWallet .ant-menu-item-selected, .MyWallet .ant-menu-item:hover {
+  border-right: 3px solid #35b4f2;
+}
+
+.MyWallet__table {
+  padding: 20px 90px;
+  /* border: 1px solid #eee; */
+}
+
+.MyWallet__buttons {
+  padding: 10px 90px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.MyWallet__buttons > *:first-child {
+  margin-right: 20px;
+}
+
+.MyWallet__title {
+  font-size: 36px;
+  margin-bottom: 30px;
+  font-weight: 700;
+}
+
+.MyWallet__coin {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: #35B4F2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.coin-sum {
+  font-size: 66px;
+  color: white;
+  font-weight: 900;
+}
+
+.coin-title {
+  font-size: 32px;
+  color: black;
+  font-weight: 700;
+}
