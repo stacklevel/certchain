@@ -16,8 +16,6 @@ CertCoin.deployed().then(i => i.approve('0x746fa6bf95c2ffef59bed2e5b389fc155b96a
 // GET CercoinAddr
 // CertCoin.deployed().then(i => i.address)
 
-Manufacturer.deployed().then(i => i.setCertcoinAddr('0xdeeef29263ce87a8547f7f4820b011fab9c481f5'));
-
 Manufacturer.deployed().then(i => i.register("Burn", "Food & drinks", "Burn", "Imaguru", "Priorbank","1234567890","+375(44)462-20-40","burn@gmail.com",{from: web3.eth.accounts[1]}));
 Manufacturer.deployed().then(i => i.register("Rich", "Food & drinks", "Juice", "Imaguru", "Alfa-bank","0987654321","+375(29)123-45-67","rich@gmail.com",{from: web3.eth.accounts[2]}));
 

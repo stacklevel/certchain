@@ -27,10 +27,6 @@ contract Manufacturer {
 
     uint registrationHold = 1000000000;
 
-    function setCertcoinAddr(address certCoinAddr){
-        certCoinContractAddress = certCoinAddr;
-    }
-
     event LogManufactureRegistered(address accountAddress, bytes32 name, bytes32 scope,
         bytes32 productsAndServices, bytes32 legalAddress, bytes32 bankName,
         bytes32 uniqNumber, bytes32 phoneNumber, bytes32 email);
