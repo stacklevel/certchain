@@ -53,7 +53,7 @@ contract CertCoin {
     /// @param _to The address of the recipient
     /// @param _value the amount to send
     function transferFrom(address _from, address _to, uint256 _value) returns (bool success) {
-        require (_value < allowance[_from][msg.sender]);     // Check allowance
+        require (_value <= allowance[_from][msg.sender]);     // Check allowance
         allowance[_from][msg.sender] -= _value;
         _transfer(_from, _to, _value);
         return true;

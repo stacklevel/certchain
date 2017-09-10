@@ -1,6 +1,6 @@
 pragma solidity ^0.4.4;
 
-import "./CertCoin.sol";
+import "../contracts/CertCoin.sol";
 
 contract Auditor {
     struct auditor {
@@ -26,7 +26,7 @@ contract Auditor {
 
 //        require(auditorInfo[msg.sender].name == "");
 
-        if (certCoinContract.transferFrom(msg.sender, this, 10)){
+        if (certCoinContract.transferFrom(msg.sender, this, 1000000000)) {
             auditorInfo[msg.sender].name = name;
             auditorInfo[msg.sender].education = education;
             auditorInfo[msg.sender].certInfo = certInfo;
