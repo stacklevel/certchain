@@ -6,6 +6,10 @@ class CompaniesListDemo extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      manufacturers: this.props.manufacturers || {},
+    };
+
     this.columns = [
     {
       title: '№',
@@ -44,66 +48,43 @@ class CompaniesListDemo extends React.Component {
       dataIndex: 'email',
     },
   ];
+  }
 
-    this.state = {
-      dataSource: [
-        {
-          rating: '99%',
-          company: 'Blockchain Certification Network',
-          applicationDate: '26.08.2017',
-          auditDate: '30.08.2017',
-          standard: 'ISO 9001-2015',
-          audit: 'Fanny Gonzales',
-          certificationBody: 'SGS',
-          numberOfDiscrepancies: '10',
-          consultant: 'Easystandart',
-          decision: true,
-        },
-        {
-          rating: '99%',
-          company: 'Blockchain Certification Network',
-          applicationDate: '26.08.2017',
-          auditDate: '30.08.2017',
-          standard: 'ISO 9001-2015',
-          audit: 'Fanny Gonzales',
-          certificationBody: 'SGS',
-          numberOfDiscrepancies: '10',
-          consultant: 'Easystandart',
-          decision: true,
-        },
-        {
-          rating: '99%',
-          company: 'Blockchain Certification Network',
-          applicationDate: '26.08.2017',
-          auditDate: '30.08.2017',
-          standard: 'ISO 9001-2015',
-          audit: 'Fanny Gonzales',
-          certificationBody: 'SGS',
-          numberOfDiscrepancies: '10',
-          consultant: 'Easystandart',
-          decision: false,
-        },
-        {
-          rating: '99%',
-          company: 'Blockchain Certification Network',
-          applicationDate: '26.08.2017',
-          auditDate: '30.08.2017',
-          standard: 'ISO 9001-2015',
-          audit: 'Fanny Gonzales',
-          certificationBody: 'SGS',
-          numberOfDiscrepancies: '10',
-          consultant: 'Easystandart',
-          decision: false,
-        }],
-      count: 2,
-    };
+  componentWillReceiveProps(newProps) {
+    if(this.props !== newProps) {
+      this.setState({
+        manufacturers: newProps.manufacturers,
+      });
+    }
+  }
+
+  componentWillMount() {
+    this.props.getAllManufacturers();
   }
 
   render() {
-    const { dataSource } = this.state;
+    const { manufacturers } = this.state;
     const columns = this.columns;
+    const dataSource = [];
+
+    Object.keys(manufacturers).forEach((key, index) => {
+      const manufaturer = manufacturers[key];
+      dataSource.push({
+        number: index+1,
+        company: manufaturer.name,
+        scope: manufaturer.scope,
+        products: manufaturer.productsAndServices,
+        address: manufaturer.legalAddress,
+        bank: manufaturer.bankName,
+        inn: manufaturer.uniqNumber,
+        phone: manufaturer.phoneNumber,
+        email: manufaturer.email,
+      });
+    })
+
     return (
       <div>
+        <h2 style={{textAlign: 'center', margin: '20px 0'}}>Manufactures</h2>
         <Table bordered dataSource={dataSource} columns={columns} />
       </div>
     );

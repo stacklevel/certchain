@@ -26,6 +26,9 @@ import RegisterOrganContainer from './containers/RegisterOrganContainer';
 import DashboardContainer from './containers/DashboardContainer.jsx';
 import ApplyContainer from './containers/ApplyContainer.jsx';
 import ApplyForCertificationContainer from './containers/ApplyForCertificationContainer.jsx';
+import CompaniesListDemoContainer from './containers/CompaniesListDemoContainer.jsx';
+import AuditorsListDemoContainer from './containers/AuditorsListDemoContainer.jsx';
+import OrgansListDemoContainer from './containers/OrgansListDemoContainer.jsx';
 
 // Redux Store
 import store from './store'
@@ -43,6 +46,9 @@ ReactDOM.render((
           <Route path="dashboard" component={DashboardContainer} />
           <Route path="apply" component={ApplyForCertificationContainer} />
           <Route path="settings" component={ApplyContainer} />
+          <Route path="manufacturers" component={CompaniesListDemoContainer} />
+          <Route path="auditors" component={AuditorsListDemoContainer} />
+          <Route path="certification-bodies" component={OrgansListDemoContainer} />
         </Route>
       </Router>
     </Provider>

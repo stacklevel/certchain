@@ -3,6 +3,10 @@ Manufacturer.deployed().then(i => i.register("Rich", "Food & drinks", "Juice", "
 Auditor.deployed().then(i => i.register("Eugene", "BSUIR", "ISO9001","+375(29)789-65-67","eugene_bsuir@gmail.com",{from: web3.eth.accounts[2]}));
 Auditor.deployed().then(i => i.register("Peter", "BSU", "ISO9001","+375(29)123-65-67","peter_bsu@gmail.com",{from: web3.eth.accounts[3]}));
 Auditor.deployed().then(i => i.register("Nicolas", "BSEU", "ISO9001","+375(29)789-11-22","nicolas_bseu@gmail.com",{from: web3.eth.accounts[4]}));
+
+Organ.deployed().then(i => i.register("British Standards Institution", "United Kingdom", "+375(29)789-11-22","british@gmail.com",{from: web3.eth.accounts[5]}));
+Organ.deployed().then(i => i.register("CEPREI Certification Body", "China", "+375(29)789-11-22","cerpei@gmail.com",{from: web3.eth.accounts[6]}));
+
 CertOrder.deployed().then(i => i.register('ISO9001','some secret1', {from: web3.eth.accounts[0]}))
 CertOrder.deployed().then(i => i.register('ISO9001','some secret2',{from: web3.eth.accounts[1]}))
 

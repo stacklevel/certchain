@@ -27,9 +27,12 @@ class App extends Component {
                 mode="horizontal"
                 style={{ lineHeight: '64px' }}
               >
-                <Menu.Item key="1"><Link to='register-manufacturer'>Manufacturer</Link></Menu.Item>
-                <Menu.Item key="2"><Link to='register-auditor'>Auditor</Link></Menu.Item>
-                <Menu.Item key="3"><Link to='register-organ'>Certification Body</Link></Menu.Item>
+                {/* <Menu.Item key="1"><Link to='register-manufacturer'>Manufacturer</Link></Menu.Item> */}
+                <Menu.Item key="1"><Link to='manufacturers'>Manufacturer</Link></Menu.Item>
+                {/* <Menu.Item key="2"><Link to='register-auditor'>Auditor</Link></Menu.Item> */}
+                <Menu.Item key="2"><Link to='auditors'>Auditor</Link></Menu.Item>
+                {/* <Menu.Item key="3"><Link to='register-organ'>Certification Body</Link></Menu.Item> */}
+                <Menu.Item key="3"><Link to='certification-bodies'>Certification Body</Link></Menu.Item>
                 <Menu.Item key="4"><Link to='dashboard'>Dashboard</Link></Menu.Item>
               </Menu>
                <div className="Button__group"> 
