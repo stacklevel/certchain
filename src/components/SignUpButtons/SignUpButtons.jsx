@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
-import { Input, Button, Row, Col } from 'antd';
+import { Button, Row, Col } from 'antd';
 import { Link } from 'react-router';
 import 'antd/dist/antd.css';
 import '../../index.css';
 import './SignUpButtons.css';
 
 class SignUpButtons extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div className='SignUpButtons'>

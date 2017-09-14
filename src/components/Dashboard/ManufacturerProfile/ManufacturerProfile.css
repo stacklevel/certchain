@@ -1,0 +1,70 @@
+.ManufacturerProfile .info-fileds {
+  margin: 30px 0;
+  display: inline-block;
+  text-align: center;
+}
+
+.ManufacturerProfile .field-title {
+  text-align: left;
+  padding: 5px 0;
+  color: #7f7f7f;
+}
+
+.ManufacturerProfile .field-value {
+  color: #1e1e1e;
+  font-weight: 700;
+}
+
+.ManufacturerProfile .main-info {
+  border-width: 1px 1px 0 0;
+  border-style: solid;
+  border-color: #eee;
+  padding-bottom: 40px;
+}
+
+.ManufacturerProfile .personal-info {
+  font-size: 16px;
+  font-weight: 700;
+  color: #000;
+  padding: 9px 0;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 30px;
+}
+
+.ManufacturerProfile .education-block .personal-info {
+  margin-left: 20px;
+}
+
+.ManufacturerProfile .top-block, .ManufacturerProfile .bottom-block {
+  display: flex;
+  border: 1px solid #eee; 
+}
+
+.ManufacturerProfile .bottom-block {
+  padding: 0 20px 60px;
+}
+
+.ManufacturerProfile .education-block > *:not(:first-child){
+  padding: 0 20px 25px 20px;
+}
+
+.ManufacturerProfile .table-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #000;
+  padding: 10px 0;
+  text-transform: uppercase;
+}
+
+.ManufacturerProfile .education-fields {
+  border-bottom: 1px solid #eee;
+}
+
+.ManufacturerProfile .table-block:not(:last-child) {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.ManufacturerProfile table tbody td {
+  vertical-align: top;
+}

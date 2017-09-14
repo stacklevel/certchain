@@ -38,68 +38,20 @@ export const initialState = {
 
 export default createReducer(initialState, {
   [REGISTER_MANUFACTURER_SUCCESS]: (state, payload) => {
-    console.log(payload);
-
-    let manufacturerInstance;
-
-    return Manufacturer.deployed().then(function(instance) {
-      manufacturerInstance = instance;
-
-      return manufacturerInstance.register(...payload.manufacturer, { from: window.web3.eth.accounts[0] });
-    }).then(function() {
-      return manufacturerInstance.getByAddress(window.web3.eth.accounts[0]);
-    }).then(function(storedData) {
-      console.log(storedData);
-    });
-
-    // return Object.assign({}, state, {
-    //   manufacturer: payload,
-    // })
+    return Object.assign({}, state, {
+      manufacturer: payload,
+    })
   },
   [REGISTER_AUDITOR_SUCCESS]: (state, payload) => {
-    console.log(payload);
-
-    let auditorInstance;
-
-    return Auditor.deployed().then(function(instance) {
-      auditorInstance = instance;
-      return auditorInstance.register(...payload.auditor, { from: window.web3.eth.accounts[0] });
-    }).then(function() {
-      return auditorInstance.getByAddress(window.web3.eth.accounts[0]);
-    }).then(function(storedData) {
-      console.log(storedData);
-    });
-
-    // return Object.assign({}, state, {
-    //   auditor: payload,
-    // })
+    return Object.assign({}, state, {
+      auditor: payload,
+    })
   },
   [REGISTER_ORGAN_SUCCESS]: (state, payload) => {
     console.log(payload);
-
-    let organInstance;
-    let organEvents;
-    // debugger;
-
-    return Organ.deployed().then(function(instance) {
-      organInstance = instance;
-      organEvents = organInstance.LogOrganRegistered({fromBlock:0,toBlock:'latest'});
-      organEvents.watch(function(error, response) {
-        console.log(error, response);
-      });
-
-      return organInstance.register(...payload.organ, { from: window.web3.eth.accounts[0] });
-    }).then(function() {
-      return organInstance.getByAddress(window.web3.eth.accounts[0]);
-    }).then(function(storedData) {
-      console.log(storedData);
-      let parsedData = storedData.map(e => window.web3.toAscii(e))
-      console.log(parsedData);
-    });
-
-    // return Object.assign({}, state, {
-    //   organ: payload,
-    // })
+    return Object.assign({}, state, {
+      organ: payload,
+    })
   },
   [GET_USER]: (state, payload) =>
     Object.assign({}, state, {

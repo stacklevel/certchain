@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import ApplyForCertificationForm from '../components/ApplyForCertificationForm/ApplyForCertificationForm';
-import { setAuditorResolutionForCertification, applyForCertification, selectAuditorForCertification, registerForCertification, getUser, getAll } from '../actions/';
+import ApplyForCertificationForm from '../../components/Dashboard/ApplyForCertificationForm/ApplyForCertificationForm';
+import { setAuditorResolutionForCertification, applyForCertification, selectAuditorForCertification, registerForCertification, getUser, getAll } from '../../actions/';
 
 const mapStateToProps = state => ({
   userType: state.user.userType,

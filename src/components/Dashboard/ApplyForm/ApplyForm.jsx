@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router'
-import { bindAll } from 'lodash';
-import { Input, Button, Row, Col, Form, Select, Menu, Icon, InputNumber } from 'antd';
+import { Input, Button, Row, Col, Form, InputNumber } from 'antd';
+import DashboardMenu from '../DashboardMenu/DashboardMenu';
 import 'antd/dist/antd.css';
-import '../../index.css';
+import '../../../index.css';
 import './ApplyForm.css';
 
-const InputGroup = Input.Group;
 const FormItem = Form.Item;
-const Option = Select.Option;
 
 class ApplyForm extends Component {
   constructor(props) {
@@ -41,30 +38,11 @@ class ApplyForm extends Component {
     );
   }
   render() {
-    const rating = 3.7;
-    const { company, directions, birth, address, phone, email} = this.state;
-
     return (
       <div className='ApplyForm'>
         <Row>
           <Col span={4}>
-            <Menu defaultSelectedKeys={['5']}>
-              <Menu.Item style={{ fontSize: 14 }} key='1'>
-                <Link to='dashboard'><Icon type="user" style={{ fontSize: 16 }} />Profile</Link>
-              </Menu.Item>
-              <Menu.Item style={{ fontSize: 14 }} key='2'>
-                <Link to='apply'><Icon type="edit" style={{ fontSize: 16 }} />Apply now</Link>
-              </Menu.Item>
-              <Menu.Item style={{ fontSize: 14 }} key='3'>
-                <Link to='projects'><Icon type="book" style={{ fontSize: 16 }} />Projects</Link>
-              </Menu.Item>
-              <Menu.Item style={{ fontSize: 14 }} key='4'>
-                <Link to='wallet'><Icon type="wallet" style={{ fontSize: 16 }} />My wallet</Link>
-              </Menu.Item>
-              <Menu.Item style={{ fontSize: 14 }} key='5'>
-                <Link to='settings'><Icon type="setting" style={{ fontSize: 16 }} />Settings</Link>
-              </Menu.Item>
-            </Menu>
+            <DashboardMenu active='5' />
           </Col>
           <Col span={20}>
             <Row>

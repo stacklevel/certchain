@@ -1,7 +1,5 @@
-import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import ApplyForm from '../components/ApplyForm/ApplyForm';
+import ApplyForm from '../../components/Dashboard/ApplyForm/ApplyForm';
 // import { createAccount } from '../actions/authActionCreators';
 
 const mapStateToProps = state => ({

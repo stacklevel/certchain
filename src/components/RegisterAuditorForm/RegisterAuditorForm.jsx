@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { bindAll } from 'lodash';
-import moment from 'moment';
 import { Input, Button, Row, Col, Form, Upload, Icon, Select, DatePicker } from 'antd';
 import 'antd/dist/antd.css';
 import '../../index.css';
@@ -78,10 +77,10 @@ class RegisterAuditorForm extends Component {
 
     const {
       fullName,
-      direction,
-      trainingDate,
+      // direction,
+      // trainingDate,
       trainingOrganization,
-      certificationDate,
+      // certificationDate,
       certificationOrganization,
       phone,
       email

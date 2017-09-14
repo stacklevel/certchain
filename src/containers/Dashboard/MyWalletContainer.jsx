@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import MyWallet from '../components/MyWallet/MyWallet';
-import { getAccountBalance } from '../actions';
+import MyWallet from '../../components/Dashboard/MyWallet/MyWallet';
+import { getAccountBalance } from '../../actions';
 
 const mapStateToProps = state => ({
   accountBalance: state.user.accountBalance

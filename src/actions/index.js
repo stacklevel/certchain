@@ -8,7 +8,6 @@ import certorder_artifacts from '../../build/contracts/CertOrder.json'
 import certcoin_artifacts from '../../build/contracts/CertCoin.json';
 
 import { default as Web3 } from 'web3';
-import { isNull } from 'lodash';
 
 if (typeof window.web3 !== 'undefined') {
   console.warn("Using web3 detected from external source like Metamask")
@@ -177,7 +176,6 @@ export function getAllOrgans() {
 }
 
 // --------------------------------------------------------------
-
 const registerManufacturerSuccess = manufacturer => (dispatch) => {
   dispatch({
     type: actionTypes.REGISTER_MANUFACTURER_SUCCESS,
@@ -185,14 +183,17 @@ const registerManufacturerSuccess = manufacturer => (dispatch) => {
   });
 };
 
-const registerManufacturerFailure = errors => ({
-  type: actionTypes.REGISTER_MANUFACTURER_FAILURE,
-  payload: { errors },
-});
+export function registerManufacturer(params) {
+  return async function(dispatch) {
 
-export const registerManufacturer = params => (dispatch) => {
-  dispatch(registerManufacturerSuccess(params));
-};
+    const manufacturerInstance = await Manufacturer.deployed();
+    await manufacturerInstance.register(...params, { from: window.web3.eth.accounts[0] });
+    const storedData = await manufacturerInstance.getByAddress(window.web3.eth.accounts[0]);
+    console.log(params);
+    console.log(storedData);
+    dispatch(registerManufacturerSuccess(storedData));
+  }
+}
 
 const registerAuditorSuccess = auditor => (dispatch) => {
   dispatch({
@@ -201,14 +202,34 @@ const registerAuditorSuccess = auditor => (dispatch) => {
   });
 };
 
-const registerAuditorFailure = errors => ({
-  type: actionTypes.REGISTER_MANUFACTURER_FAILURE,
-  payload: { errors },
-});
+export function registerAuditor(params) {
+  return async function(dispatch) {
 
-export const registerAuditor = params => (dispatch) => {
-  dispatch(registerAuditorSuccess(params));
+    const auditorInstance = await Auditor.deployed();
+    await auditorInstance.register(...params, { from: window.web3.eth.accounts[0] });
+    const storedData = await auditorInstance.getByAddress(window.web3.eth.accounts[0]);
+    console.log(storedData);
+    dispatch(registerAuditorSuccess(storedData));
+  }
+}
+
+const registerOrganSuccess = organ => (dispatch) => {
+  dispatch({
+    type: actionTypes.REGISTER_ORGAN_SUCCESS,
+    payload: { organ },
+  });
 };
+
+export function registerOrgan(params) {
+  return async function(dispatch) {
+
+    const organInstance = await Organ.deployed();
+    await organInstance.register(...params, { from: window.web3.eth.accounts[0] });
+    const storedData = await organInstance.getByAddress(window.web3.eth.accounts[0]);
+    console.log(storedData);
+    dispatch(registerOrganSuccess(storedData));
+  }
+}
 
 const validateUser = (user) => user[Object.keys(user)[0]] !== ''
 
@@ -243,22 +264,6 @@ export function getUser() {
     });
   }
 }
-
-const registerOrganSuccess = organ => (dispatch) => {
-  dispatch({
-    type: actionTypes.REGISTER_ORGAN_SUCCESS,
-    payload: { organ },
-  });
-};
-
-const registerOrganFailure = errors => ({
-  type: actionTypes.REGISTER_ORGAN_FAILURE,
-  payload: { errors },
-});
-
-export const registerOrgan = params => (dispatch) => {
-  dispatch(registerOrganSuccess(params));
-};
 
 // -----------------------------------------------------
 
