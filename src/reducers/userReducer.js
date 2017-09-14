@@ -1,19 +1,6 @@
 import { createReducer } from '../util/wrappers';
 import constants from '../constants';
 
-import { default as contract } from 'truffle-contract';
-import manufacturer_artifacts from '../../build/contracts/Manufacturer.json';
-import auditor_artifacts from '../../build/contracts/Auditor.json';
-import organ_artifacts from '../../build/contracts/Organ.json'
-
-const Manufacturer = contract(manufacturer_artifacts);
-const Auditor = contract(auditor_artifacts);
-const Organ = contract(organ_artifacts);
-
-Manufacturer.setProvider(window.web3.currentProvider);
-Auditor.setProvider(window.web3.currentProvider);
-Organ.setProvider(window.web3.currentProvider);
-
 const {
   REGISTER_MANUFACTURER_SUCCESS,
   REGISTER_AUDITOR_SUCCESS,
