@@ -1,19 +1,14 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router'
-import { bindAll } from 'lodash';
-import { Input, Button, Row, Col, Form, Select, Menu, Icon, Rate, Layout, Card, Tag } from 'antd';
+import { Row, Col, Rate } from 'antd';
 import 'antd/dist/antd.css';
-import '../../index.css';
-import './DashboardForm.css';
+import '../../../index.css';
+import './ManufacturerProfile.css';
 import CoursesTable from '../CoursesTable/CoursesTable';
 import JobExperienceTable from '../JobExperienceTable/JobExperienceTable';
 import AuditActivityTable from '../AuditActivityTable/AuditActivityTable';
+import DashboardMenu from '../DashboardMenu/DashboardMenu';
 
-const InputGroup = Input.Group;
-const FormItem = Form.Item;
-const Option = Select.Option;
-
-class DashboardForm extends Component {
+class ManufacturerProfile extends Component {
   constructor(props) {
     super(props);
 
@@ -32,26 +27,10 @@ class DashboardForm extends Component {
     const { company, directions, birth, address, phone, email} = this.state;
 
     return (
-      <div className='DashboardForm'>
+      <div className='ManufacturerProfile'>
         <Row>
           <Col span={4}>
-            <Menu defaultSelectedKeys={['key-1']}>
-              <Menu.Item style={{ fontSize: 14 }} key='key-1'>
-                <Link to='dashboard'><Icon type="user" style={{ fontSize: 16 }} />Profile</Link>
-              </Menu.Item>
-              <Menu.Item style={{ fontSize: 14 }}>
-                <Link to='apply'><Icon type="edit" style={{ fontSize: 16 }} />Apply now</Link>
-              </Menu.Item>
-              <Menu.Item style={{ fontSize: 14 }}>
-                <Link to='projects'><Icon type="book" style={{ fontSize: 16 }} />Projects</Link>
-              </Menu.Item>
-              <Menu.Item style={{ fontSize: 14 }}>
-                <Link to='wallet'><Icon type="wallet" style={{ fontSize: 16 }} />My wallet</Link>
-              </Menu.Item>
-              <Menu.Item style={{ fontSize: 14 }}>
-                <Link to='settings'><Icon type="setting" style={{ fontSize: 16 }} />Settings</Link>
-              </Menu.Item>
-            </Menu>
+            <DashboardMenu active='1' />
           </Col>
           <div className="top-block">
             <Col span={6} className='main-info' style={{ textAlign: 'center' }}>
@@ -132,4 +111,4 @@ class DashboardForm extends Component {
   }
 }
 
-export default DashboardForm;
+export default ManufacturerProfile;

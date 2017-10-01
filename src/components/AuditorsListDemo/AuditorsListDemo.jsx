@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Icon } from 'antd';
+import { Table } from 'antd';
 import './AuditorsListDemo.css';
 
 class AuditorsListDemo extends React.Component {

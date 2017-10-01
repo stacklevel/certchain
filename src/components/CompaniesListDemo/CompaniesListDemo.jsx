@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Icon } from 'antd';
+import { Table } from 'antd';
 import './CompaniesListDemo.css';
 
 class CompaniesListDemo extends React.Component {

@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router'
 import { bindAll } from 'lodash';
-import { Input, Button, Row, Col, Form, Select, Menu, Icon, InputNumber, Table } from 'antd';
+import { Input, Button, Row, Col, Form, Select, Icon, Table } from 'antd';
+import DashboardMenu from '../DashboardMenu/DashboardMenu';
 import 'antd/dist/antd.css';
-import '../../index.css';
+import '../../../index.css';
 import './ApplyForCertificationForm.css';
 
-const InputGroup = Input.Group;
 const FormItem = Form.Item;
 const Option = Select.Option;
 
@@ -26,13 +25,15 @@ class ApplyForCertificationForm extends Component {
       currentUserAccount: this.props.currentUserAccount,
     };
 
-    this.renderInputField = this.renderInputField.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleSelectChange = this.handleSelectChange.bind(this);
-    this.handleApply = this.handleApply.bind(this);
-    this.handleResolve = this.handleResolve.bind(this);
-    this.handleRegister = this.handleRegister.bind(this);
-    this.handleAuditorSelect = this.handleAuditorSelect.bind(this);
+    bindAll(this, [
+      'renderInputField',
+      'handleInputChange',
+      'handleSelectChange',
+      'handleApply',
+      'handleResolve',
+      'handleRegister',
+      'handleAuditorSelect',
+    ]);
   }
 
   componentWillMount() {
@@ -243,28 +244,12 @@ class ApplyForCertificationForm extends Component {
 
   render() {
     const { certificationInfo, secretInfo } = this.state.certification;
-    const { userType, certOrders, manufacturers } = this.state;
+    const { userType } = this.state;
 
     return (
       <div className='ApplyForCertificationForm'>
         <Col span={4}>
-          <Menu defaultSelectedKeys={['2']}>
-            <Menu.Item style={{ fontSize: 14 }} key='1'>
-              <Link to='dashboard'><Icon type="user" style={{ fontSize: 16 }} />Profile</Link>
-            </Menu.Item>
-            <Menu.Item style={{ fontSize: 14 }} key='2'>
-              <Link to='apply'><Icon type="edit" style={{ fontSize: 16 }} />Apply now</Link>
-            </Menu.Item>
-            <Menu.Item style={{ fontSize: 14 }} key='3'>
-              <Link to='projects'><Icon type="book" style={{ fontSize: 16 }} />Projects</Link>
-            </Menu.Item>
-            <Menu.Item style={{ fontSize: 14 }} key='4'>
-              <Link to='wallet'><Icon type="wallet" style={{ fontSize: 16 }} />My wallet</Link>
-            </Menu.Item>
-            <Menu.Item style={{ fontSize: 14 }} key='5'>
-              <Link to='settings'><Icon type="setting" style={{ fontSize: 16 }} />Settings</Link>
-            </Menu.Item>
-          </Menu>
+          <DashboardMenu active='2' />
         </Col>
         <Col span={20}>
           <Row>

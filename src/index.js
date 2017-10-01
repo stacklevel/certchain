@@ -23,13 +23,13 @@ import HomeContainer from './containers/HomeContainer';
 import RegisterManufacturerContainer from './containers/RegisterManufacturerContainer';
 import RegisterAuditorContainer from './containers/RegisterAuditorContainer';
 import RegisterOrganContainer from './containers/RegisterOrganContainer';
-import DashboardContainer from './containers/DashboardContainer.jsx';
-import ApplyContainer from './containers/ApplyContainer.jsx';
-import ApplyForCertificationContainer from './containers/ApplyForCertificationContainer.jsx';
+import ProfileContainer from './containers/Dashboard/ProfileContainer.jsx';
+import ApplyContainer from './containers/Dashboard/ApplyContainer.jsx';
+import ApplyForCertificationContainer from './containers/Dashboard/ApplyForCertificationContainer.jsx';
 import CompaniesListDemoContainer from './containers/CompaniesListDemoContainer.jsx';
 import AuditorsListDemoContainer from './containers/AuditorsListDemoContainer.jsx';
 import OrgansListDemoContainer from './containers/OrgansListDemoContainer.jsx';
-import MyWalletContainer from './containers/MyWalletContainer.jsx';
+import MyWalletContainer from './containers/Dashboard/MyWalletContainer.jsx';
 import SignUpButtons from './components/SignUpButtons/SignUpButtons.jsx';
 
 // Redux Store
@@ -45,7 +45,7 @@ ReactDOM.render((
           <Route path="register-manufacturer" component={RegisterManufacturerContainer} /> 
           <Route path="register-auditor" component={RegisterAuditorContainer} /> 
           <Route path="register-organ" component={RegisterOrganContainer} />
-          <Route path="dashboard" component={DashboardContainer} />
+          <Route path="dashboard" component={ProfileContainer} />
           <Route path="apply" component={ApplyForCertificationContainer} />
           <Route path="settings" component={ApplyContainer} />
           <Route path="manufacturers" component={CompaniesListDemoContainer} />

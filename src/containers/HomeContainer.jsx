@@ -2,9 +2,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Home from '../components/Home/Home';
 import { getUser, getAllOrgans, getAllManufacturers, getAllAuditors } from '../actions';
-import AuditorsListDemoContainer from './AuditorsListDemoContainer';
-import OrgansListDemoContainer from './OrgansListDemoContainer';
-import CompaniesListDemoContainer from './CompaniesListDemoContainer';
 
 const mapStateToProps = state => ({
    auditors: state.user.auditors,

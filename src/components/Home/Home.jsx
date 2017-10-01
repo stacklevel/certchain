@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import CompaniesTable from '../CompaniesTable/CompaniesTable';
+// import CompaniesTable from '../CompaniesTable/CompaniesTable';
 import { Row, Col } from 'antd';
 import AuditorsListDemo from '../AuditorsListDemo/AuditorsListDemo';
 import OrgansListDemo from '../OrgansListDemo/OrgansListDemo';

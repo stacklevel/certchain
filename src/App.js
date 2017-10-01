@@ -4,7 +4,9 @@ import './App.css';
 
 import { Layout, Menu, LocaleProvider, Button } from 'antd';
 import enUS from 'antd/lib/locale-provider/en_US';
-const { Header, Content, Footer } = Layout;
+import PageFooter from './components/PageFooter/PageFooter';
+
+const { Header, Content } = Layout;
 
 const imageSrc = './img/logo.svg';
 
@@ -27,11 +29,8 @@ class App extends Component {
                 mode="horizontal"
                 style={{ lineHeight: '64px' }}
               >
-                {/* <Menu.Item key="1"><Link to='register-manufacturer'>Manufacturer</Link></Menu.Item> */}
                 <Menu.Item key="1"><Link to='manufacturers'>Manufacturer</Link></Menu.Item>
-                {/* <Menu.Item key="2"><Link to='register-auditor'>Auditor</Link></Menu.Item> */}
                 <Menu.Item key="2"><Link to='auditors'>Auditor</Link></Menu.Item>
-                {/* <Menu.Item key="3"><Link to='register-organ'>Certification Body</Link></Menu.Item> */}
                 <Menu.Item key="3"><Link to='certification-bodies'>Certification Body</Link></Menu.Item>
                 <Menu.Item key="4"><Link to='dashboard'>Dashboard</Link></Menu.Item>
               </Menu>
@@ -48,9 +47,7 @@ class App extends Component {
               {this.props.children}
             </div>
           </Content>
-          <Footer style={{ textAlign: 'center' }}>
-            Certchain.io ©2017
-          </Footer>
+          <PageFooter />
         </Layout>
       </LocaleProvider>
     );

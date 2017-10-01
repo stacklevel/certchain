@@ -1,0 +1,13 @@
+
+.DashboardMenu .ant-menu-item {
+  font-size: 14px;
+  border-right: 3px solid transparent;
+}
+
+.DashboardMenu .ant-menu-item i {
+  font-size: 16px;
+}
+
+.DashboardMenu .ant-menu-item-selected, .DashboardMenu .ant-menu-item:hover {
+  border-right: 3px solid #35b4f2;
+}

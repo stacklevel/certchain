@@ -1,37 +1,28 @@
-
-.DashboardForm .ant-menu-item {
-  border-right: 3px solid transparent;
-}
-
-.DashboardForm .ant-menu-item-selected, .DashboardForm .ant-menu-item:hover {
-  border-right: 3px solid #35b4f2;
-}
-
-.DashboardForm .info-fileds {
+.OrganProfile .info-fileds {
   margin: 30px 0;
   display: inline-block;
   text-align: center;
 }
 
-.DashboardForm .field-title {
+.OrganProfile .field-title {
   text-align: left;
   padding: 5px 0;
   color: #7f7f7f;
 }
 
-.DashboardForm .field-value {
+.OrganProfile .field-value {
   color: #1e1e1e;
   font-weight: 700;
 }
 
-.DashboardForm .main-info {
+.OrganProfile .main-info {
   border-width: 1px 1px 0 0;
   border-style: solid;
   border-color: #eee;
   padding-bottom: 40px;
 }
 
-.DashboardForm .personal-info {
+.OrganProfile .personal-info {
   font-size: 16px;
   font-weight: 700;
   color: #000;
@@ -40,24 +31,24 @@
   margin-bottom: 30px;
 }
 
-.DashboardForm .education-block .personal-info {
+.OrganProfile .education-block .personal-info {
   margin-left: 20px;
 }
 
-.DashboardForm .top-block, .DashboardForm .bottom-block {
+.OrganProfile .top-block, .OrganProfile .bottom-block {
   display: flex;
   border: 1px solid #eee; 
 }
 
-.DashboardForm .bottom-block {
+.OrganProfile .bottom-block {
   padding: 0 20px 60px;
 }
 
-.DashboardForm .education-block > *:not(:first-child){
+.OrganProfile .education-block > *:not(:first-child){
   padding: 0 20px 25px 20px;
 }
 
-.DashboardForm .table-title {
+.OrganProfile .table-title {
   font-size: 16px;
   font-weight: 700;
   color: #000;
@@ -65,15 +56,15 @@
   text-transform: uppercase;
 }
 
-.DashboardForm .education-fields {
+.OrganProfile .education-fields {
   border-bottom: 1px solid #eee;
 }
 
-.DashboardForm .table-block:not(:last-child) {
+.OrganProfile .table-block:not(:last-child) {
   padding-bottom: 20px;
   border-bottom: 1px solid #eee;
 }
 
-.DashboardForm table tbody td {
+.OrganProfile table tbody td {
   vertical-align: top;
 }
