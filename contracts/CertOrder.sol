@@ -13,63 +13,42 @@ contract CertOrder {
         auditorContractAddress = auditorContractAddr;
     }
 
-    struct certOrder {
+    struct CertOrderInfo {
+        address headAuditor;
+        mapping (address => AuditorInfo) appliedAuditorsInfo;
+        uint appliedAuditors;
         bytes32 certInfo;
-        address appliedAuditor1;
-        address appliedAuditor2;
-        address appliedAuditor3;
-        address appliedAuditor4;
-        address appliedAuditor5;
-
-        address selectedAuditor;
         bytes32 secretInformation;
         bytes32 auditorResolution;
-
-        address nextAddr;
-
+        address selectedAuditor;
+        address nextCertOrder;
     }
 
-    struct auditorOffers{
-        uint offer1;
-        uint offer2;
-        uint offer3;
-        uint offer4;
-        uint offer5;
+    struct AuditorInfo {
+        uint offer;
+        address nextAuditor;
     }
 
-    address public headAddr;
-
-    mapping (address => certOrder) public certOrderInfo;
-    mapping (address => auditorOffers) public auditorOffersInfo;
-
+    address public headCertOrder;
+    mapping (address => CertOrderInfo) public certOrderInfo;
 
     function register (bytes32 certInfo, bytes32 secretInformation) {
         certOrderInfo[msg.sender].certInfo = certInfo;
         certOrderInfo[msg.sender].secretInformation = secretInformation;
-
-        certOrderInfo[msg.sender].nextAddr = headAddr;
-        headAddr = msg.sender;
+        certOrderInfo[msg.sender].nextCertOrder = headCertOrder;
+        headCertOrder = msg.sender;
     }
 
-
-    function getByAddress(address manufacturerAddress) constant returns (bytes32 certInfo, address nextAddr,
-                                                                        address appliedAuditor1, address appliedAuditor2,
-                                                                        address appliedAuditor3, address appliedAuditor4,
-                                                                        address appliedAuditor5, address selectedAuditor) {
-
-
-     certInfo = certOrderInfo[manufacturerAddress].certInfo;
-     nextAddr = certOrderInfo[manufacturerAddress].nextAddr;
-     appliedAuditor1 = certOrderInfo[manufacturerAddress].appliedAuditor1;
-     appliedAuditor2 = certOrderInfo[manufacturerAddress].appliedAuditor2;
-     appliedAuditor3 = certOrderInfo[manufacturerAddress].appliedAuditor3;
-     appliedAuditor4 = certOrderInfo[manufacturerAddress].appliedAuditor4;
-     appliedAuditor5 = certOrderInfo[manufacturerAddress].appliedAuditor5;
-     selectedAuditor = certOrderInfo[manufacturerAddress].selectedAuditor;
-
+    function getByAddress(address manufacturer) constant returns (bytes32 certInfo, address nextCertOrder,
+                                                                         uint appliedAuditors, address selectedAuditor)
+    {
+        certInfo = certOrderInfo[manufacturer].certInfo;
+        nextCertOrder = certOrderInfo[manufacturer].nextCertOrder;
+        appliedAuditors = certOrderInfo[manufacturer].appliedAuditors;
+        selectedAuditor = certOrderInfo[manufacturer].selectedAuditor;
     }
 
-    function apply(address manufacturerAddress, uint offer) returns (bool){
+    function apply(address manufacturer, uint offer) returns (bool) {
         Auditor auditorContract = Auditor(auditorContractAddress);
 
         bytes32 name;
@@ -81,84 +60,57 @@ contract CertOrder {
 
         (name, education, certInfo, phoneNumber, email, nextAuditorAddress) = auditorContract.getByAddress(msg.sender);
 
-        if(certInfo == certOrderInfo[manufacturerAddress].certInfo){
-
-            bool res = true;
-            if (certOrderInfo[manufacturerAddress].appliedAuditor1 == address(0)){
-                certOrderInfo[manufacturerAddress].appliedAuditor1 = msg.sender;
-                auditorOffersInfo[manufacturerAddress].offer1 = offer;
-            }else if (certOrderInfo[manufacturerAddress].appliedAuditor2 == address(0)){
-                certOrderInfo[manufacturerAddress].appliedAuditor2 = msg.sender;
-                auditorOffersInfo[manufacturerAddress].offer2 = offer;
-            }else if (certOrderInfo[manufacturerAddress].appliedAuditor3 == address(0)){
-                certOrderInfo[manufacturerAddress].appliedAuditor3 = msg.sender;
-                auditorOffersInfo[manufacturerAddress].offer3 = offer;
-            }else if (certOrderInfo[manufacturerAddress].appliedAuditor4 == address(0)){
-                certOrderInfo[manufacturerAddress].appliedAuditor4 = msg.sender;
-                auditorOffersInfo[manufacturerAddress].offer4 = offer;
-            }else if (certOrderInfo[manufacturerAddress].appliedAuditor5 == address(0)){
-                certOrderInfo[manufacturerAddress].appliedAuditor5 = msg.sender;
-                auditorOffersInfo[manufacturerAddress].offer5 = offer;
-            }else{
+        bool res = true;
+        CertOrderInfo storage currentOrder = certOrderInfo[manufacturer];
+        if (certInfo == currentOrder.certInfo) {
+            if (currentOrder.appliedAuditorsInfo[msg.sender].offer == 0) {
+                currentOrder.appliedAuditorsInfo[msg.sender].offer = offer;
+                currentOrder.appliedAuditorsInfo[msg.sender].nextAuditor = currentOrder.headAuditor;
+                currentOrder.headAuditor = msg.sender;
+            }else {
                 res = false;
             }
-        }else{
+        }else {
             res = false;
         }
-
         return res;
-
     }
 
-    function selectAuditor(address auditorAddress) returns (bool success){
+    function selectAuditor(address auditor) returns (bool success) {
         CertCoin certCoinContract = CertCoin(certCoinContractAddress);
         uint amount;
-        if (certOrderInfo[msg.sender].appliedAuditor1 == auditorAddress){
-            amount = auditorOffersInfo[msg.sender].offer1;
-        }else if (certOrderInfo[msg.sender].appliedAuditor2 == auditorAddress){
-            amount = auditorOffersInfo[msg.sender].offer2;
-        }else if (certOrderInfo[msg.sender].appliedAuditor3 == auditorAddress){
-            amount = auditorOffersInfo[msg.sender].offer3;
-        }else if (certOrderInfo[msg.sender].appliedAuditor4 == auditorAddress){
-            amount = auditorOffersInfo[msg.sender].offer4;
-        }else if (certOrderInfo[msg.sender].appliedAuditor5 == auditorAddress){
-            amount = auditorOffersInfo[msg.sender].offer5;
+
+        if (certOrderInfo[msg.sender].appliedAuditorsInfo[auditor].offer != 0)
+            amount = certOrderInfo[msg.sender].appliedAuditorsInfo[auditor].offer;
+
+        if (certCoinContract.transferFrom(msg.sender, this, amount)) {
+            certOrderInfo[msg.sender].selectedAuditor = auditor;
+            return true;
         }
-        if(certCoinContract.transferFrom(msg.sender, this, amount)){
-            certOrderInfo[msg.sender].selectedAuditor = auditorAddress;
-        return true;
-        }
-
+        return false;
     }
 
-    function getAuditorOffers(address manufacturerAddress) constant returns(uint a1, uint a2, uint a3, uint a4, uint a5){
-        a1 =auditorOffersInfo[manufacturerAddress].offer1;
-        a2 =auditorOffersInfo[manufacturerAddress].offer2;
-        a3 =auditorOffersInfo[manufacturerAddress].offer3;
-        a4 =auditorOffersInfo[manufacturerAddress].offer4;
-        a5 =auditorOffersInfo[manufacturerAddress].offer5;
+    function getAuditorOffer(address manufacturer, address auditor) constant returns(uint) {
+        return certOrderInfo[manufacturer].appliedAuditorsInfo[auditor].offer;
     }
 
-    function getSelectedAuditor(address manufacturerAddress) constant returns (address){
-        return certOrderInfo[manufacturerAddress].selectedAuditor;
+    function getSelectedAuditor(address manufacturer) constant returns (address) {
+        return certOrderInfo[manufacturer].selectedAuditor;
     }
 
-    function getSecretInformation(address manufacturerAddress) constant returns (bytes32){
-        if(msg.sender == manufacturerAddress || certOrderInfo[manufacturerAddress].selectedAuditor == msg.sender){
-            return certOrderInfo[manufacturerAddress].secretInformation;
+    function getSecretInformation(address manufacturer) constant returns (bytes32) {
+        if (msg.sender == manufacturer || certOrderInfo[manufacturer].selectedAuditor == msg.sender) {
+            return certOrderInfo[manufacturer].secretInformation;
         }
     }
 
-    function setAuditorResolution(address manufacturerAddress, bytes32 resolution){
-        if (certOrderInfo[manufacturerAddress].selectedAuditor == msg.sender){
-            certOrderInfo[manufacturerAddress].auditorResolution = resolution;
+    function setAuditorResolution(address manufacturer, bytes32 resolution) {
+        if (certOrderInfo[manufacturer].selectedAuditor == msg.sender) {
+            certOrderInfo[manufacturer].auditorResolution = resolution;
         }
-
     }
 
-    function getAuditorResolution(address manufacturerAddress) constant returns (bytes32){
-        return certOrderInfo[manufacturerAddress].auditorResolution;
+    function getAuditorResolution(address manufacturer) constant returns (bytes32) {
+        return certOrderInfo[manufacturer].auditorResolution;
     }
-
-
 }

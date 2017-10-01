@@ -1,8 +1,14 @@
 pragma solidity ^0.4.4;
 
-contract tokenRecipient { 
-  function receiveApproval(address _from, uint256 _value, address _token, bytes _extraData); 
+
+contract TokenRecipient {
+    function receiveApproval(
+        address _from,
+        uint256 _value,
+        address _token,
+        bytes _extraData);
 }
+
 
 contract CertCoin {
     /* Public variables of the token */
@@ -26,9 +32,9 @@ contract CertCoin {
 
         balanceOf[msg.sender] = 10000000000;                   // Give the creator all initial tokens
         totalSupply = 10000000000;                             // Update total supply
-        name = 'CertCoin';                                   // Set the name for display purposes
-        symbol = 'CRT';                                // Set the symbol for display purposes
-        decimals =  8;                             // Amount of decimals for display purposes
+        name = "CertCoin";                                   // Set the name for display purposes
+        symbol = "CRT";                                // Set the symbol for display purposes
+        decimals = 8;                             // Amount of decimals for display purposes
     }
 
     /* Internal transfer, only can be called by this contract */
@@ -63,7 +69,8 @@ contract CertCoin {
     /// @param _spender The address authorized to spend
     /// @param _value the max amount they can spend
     function approve(address _spender, uint256 _value)
-        returns (bool success) {
+        returns (bool success)
+    {
         allowance[msg.sender][_spender] = _value;
         return true;
     }
@@ -73,13 +80,19 @@ contract CertCoin {
     /// @param _value the max amount they can spend
     /// @param _extraData some extra information to send to the approved contract
     function approveAndCall(address _spender, uint256 _value, bytes _extraData)
-        returns (bool success) {
-        tokenRecipient spender = tokenRecipient(_spender);
+        returns (bool success)
+    {
+        TokenRecipient spender = TokenRecipient(_spender);
         if (approve(_spender, _value)) {
-            spender.receiveApproval(msg.sender, _value, this, _extraData);
+            spender.receiveApproval(
+                msg.sender,
+                _value,
+                this,
+                _extraData
+            );
             return true;
         }
-    }        
+    }
 
     /// @notice Remove `_value` tokens from the system irreversibly
     /// @param _value the amount of money to burn

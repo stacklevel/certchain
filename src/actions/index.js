@@ -62,7 +62,7 @@ const parseManufacturer = (address, data) => {
 export function getAllManufacturers() {
   return async function(dispatch) {
     let instance = await Manufacturer.deployed();
-    let head = await instance.getHeadAddr();
+    let head = await instance.headAddr();
     let current = head;
 
     while (parseInt(current) !== 0) {
@@ -128,7 +128,7 @@ const parseAuditor = (address, data) => {
 export function getAllAuditors() {
   return async function(dispatch) {
     let instance = await Auditor.deployed();
-    let head = await instance.getHeadAddr();
+    let head = await instance.headAddr();
     let current = head;
 
     while (parseInt(current) !== 0) {
@@ -164,7 +164,7 @@ const parseOrgan = (address, data) => {
 export function getAllOrgans() {
   return async function(dispatch) {
     let instance = await Organ.deployed();
-    let head = await instance.getHeadAddr();
+    let head = await instance.headAddr();
     let current = head;
 
     while (parseInt(current) !== 0) {
@@ -319,8 +319,8 @@ export function getAccountBalance(addr = window.web3.eth.defaultAccount) {
   return async function(dispatch) {
     let instance  = await CertCoin.deployed();
 
-    const accountBalance = await instance.balanceOf(addr, { from: addr }); 
-    
+    const accountBalance = await instance.balanceOf(addr, { from: addr });
+
     console.log(accountBalance);
 
     dispatch({

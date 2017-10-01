@@ -4,8 +4,7 @@ import "../contracts/CertCoin.sol";
 
 
 contract Manufacturer {
-
-    struct manufacturer {
+    struct ManufacturerInfo {
         bytes32 name;
         bytes32 scope;
         bytes32 productsAndServices;
@@ -17,7 +16,7 @@ contract Manufacturer {
         address nextAddr;
     }
 
-    mapping (address => manufacturer) public manufacturerInfo;
+    mapping (address => ManufacturerInfo) public manufacturerInfo;
     address public headAddr;
     address certCoinContractAddress;
 
@@ -27,13 +26,18 @@ contract Manufacturer {
 
     uint registrationHold = 1000000000;
 
-    event LogManufactureRegistered(address accountAddress, bytes32 name, bytes32 scope,
-        bytes32 productsAndServices, bytes32 legalAddress, bytes32 bankName,
-        bytes32 uniqNumber, bytes32 phoneNumber, bytes32 email);
-
-    function register (bytes32 name, bytes32 scope, bytes32 productsAndServices, bytes32 legalAddress, bytes32 bankName, bytes32 uniqNumber, bytes32 phoneNumber, bytes32 email) returns (bool success){
+    function register (
+        bytes32 name,
+        bytes32 scope,
+        bytes32 productsAndServices,
+        bytes32 legalAddress,
+        bytes32 bankName,
+        bytes32 uniqNumber,
+        bytes32 phoneNumber,
+        bytes32 email) returns (bool success)
+    {
         CertCoin certCoinContract = CertCoin(certCoinContractAddress);
-        if (manufacturerInfo[msg.sender].name == '' && certCoinContract.transferFrom(msg.sender, this, registrationHold)) {
+        if (manufacturerInfo[msg.sender].name == "" && certCoinContract.transferFrom(msg.sender, this, registrationHold)) {
             manufacturerInfo[msg.sender].name = name;
             manufacturerInfo[msg.sender].scope = scope;
             manufacturerInfo[msg.sender].productsAndServices = productsAndServices;
@@ -44,7 +48,6 @@ contract Manufacturer {
             manufacturerInfo[msg.sender].email = email;
             manufacturerInfo[msg.sender].nextAddr = headAddr;
             headAddr = msg.sender;
-            LogManufactureRegistered(msg.sender, name, scope, productsAndServices, legalAddress, bankName, uniqNumber, phoneNumber, email);
             return true;
         }
     }
@@ -60,9 +63,4 @@ contract Manufacturer {
         email = manufacturerInfo[manufacturerAddress].email;
         nextAddr = manufacturerInfo[manufacturerAddress].nextAddr;
     }
-
-    function getHeadAddr() constant returns (address) {
-        return headAddr;
-    }
-
 }
